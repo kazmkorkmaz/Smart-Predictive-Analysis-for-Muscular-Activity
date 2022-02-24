@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/widgets/bottom.dart';
+import '../widgets/drawer.dart';
+import '../widgets/floating_action.dart';
 
 class HomePage extends StatelessWidget {
+  static const routeName = '/HomePage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,6 +16,10 @@ class HomePage extends StatelessWidget {
           child: Text('Home Page1'),
         ),
       ),
+      bottomNavigationBar: BottomWidget(),
+      floatingActionButton: FloatingAction(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      drawer: MainDrawer(),
     );
   }
 }

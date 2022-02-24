@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117304545071",
+    "project_id": "spa-for-muscular-activity",
+    "storage_bucket": "spa-for-muscular-activity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117304545071:android:733cec18e65ef361de5bda",
+        "android_client_info": {
+          "package_name": "com.example.mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117304545071-mu5rcfvotckqnjvge29gqh9bnetgmuqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC86oDqQR3QqAaEyzLgRnAjtYS1GdRBvzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117304545071-mu5rcfvotckqnjvge29gqh9bnetgmuqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

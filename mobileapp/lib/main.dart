@@ -1,8 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/login.dart';
+import 'package:mobileapp/screens/register.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +19,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        backgroundColor: Colors.orange,
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: RegisterScreen(),
+      routes: {
+        HomePage.routeName: (ctx) => HomePage(),
+        SignInScreen.routeName: (ctx) => SignInScreen(),
+        RegisterScreen.routeName: (ctx) => RegisterScreen(),
+      },
     );
   }
 }
