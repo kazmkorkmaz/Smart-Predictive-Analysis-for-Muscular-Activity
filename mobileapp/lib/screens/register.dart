@@ -12,6 +12,8 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController emailText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
   TextEditingController cpasswordText = TextEditingController();
+  FocusNode confirmPass = FocusNode();
+  FocusNode password = FocusNode();
   var message = '';
 
   @override
@@ -77,6 +79,7 @@ class RegisterScreen extends StatelessWidget {
                 child: TextField(
                   controller: emailText,
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'E-mail',
                       prefixIcon: Icon(Icons.email),
@@ -87,8 +90,9 @@ class RegisterScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: passwordText,
+                  textInputAction: TextInputAction.next,
                   obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                       labelText: 'Password',
                       prefixIcon: Icon(Icons.password),
@@ -100,7 +104,8 @@ class RegisterScreen extends StatelessWidget {
                 child: TextField(
                   controller: cpasswordText,
                   obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       prefixIcon: Icon(Icons.password),

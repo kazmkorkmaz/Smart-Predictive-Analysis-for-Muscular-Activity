@@ -69,6 +69,7 @@ class SignInScreen extends StatelessWidget {
                 child: TextField(
                   controller: emailText,
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'E-mail',
                       prefixIcon: Icon(Icons.email),
@@ -81,7 +82,8 @@ class SignInScreen extends StatelessWidget {
                 child: TextField(
                   controller: passwordText,
                   obscureText: true,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                       labelText: 'Password',
                       prefixIcon: Icon(Icons.password),
