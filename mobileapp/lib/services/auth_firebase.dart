@@ -31,7 +31,7 @@ class AuthenticationService {
         return message;
       }
     } catch (e) {
-      var message = e.toString();
+      var message = 'An Error Occurred!';
       return message;
     }
   }
@@ -41,7 +41,6 @@ class AuthenticationService {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      print(userCredential.user);
       return userCredential.user!.uid;
     } on FirebaseAuthException catch (e) {
       var message = '';
@@ -54,7 +53,7 @@ class AuthenticationService {
       } else if (e.code == 'user-not-found') {
         message = 'There is no user corresponding to the given email!';
         return message;
-      } else if (e.code == 'weak-password') {
+      } else if (e.code == 'wrong-password') {
         message =
             'The password is invalid for the given email, or the account corresponding to the email does not have a password set!';
         return message;
@@ -63,8 +62,27 @@ class AuthenticationService {
         return message;
       }
     } catch (e) {
-      var message = e.toString();
+      var message = 'An Error Occurred!';
       return message;
+    }
+  }
+
+  Future sendVerificationMail() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+      }
+    } catch (e) {
+      return 'An Error Occurred!';
+    }
+  }
+
+  Future sendResetPasswordEmail(email) async {
+    try {
+      return await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      return 'An Error Occurred!';
     }
   }
 

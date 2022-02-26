@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/register.dart';
+import 'package:mobileapp/screens/reset_password.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -35,11 +36,16 @@ class SignInScreen extends StatelessWidget {
     void signIn() async {
       dynamic result = await auth.signIn(emailText.text, passwordText.text);
       User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
+
+      if (user != null && user.emailVerified) {
         Navigator.of(context).pushReplacementNamed(HomePage.routeName);
       } else {
-        message = result.toString();
-        showErrorDialog(message);
+        if (!user!.emailVerified) {
+          showErrorDialog('Please verify email');
+        } else {
+          message = result.toString();
+          showErrorDialog(message);
+        }
       }
     }
 
@@ -96,7 +102,10 @@ class SignInScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(ResetPassword.routeName);
+                        },
                         child: const Text('Forgot Password ?')),
                   ],
                 ),

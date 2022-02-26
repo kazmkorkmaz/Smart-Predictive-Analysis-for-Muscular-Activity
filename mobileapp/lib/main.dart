@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/login.dart';
 import 'package:mobileapp/screens/register.dart';
+import 'package:mobileapp/screens/reset_password.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +23,12 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.orange,
         primarySwatch: Colors.blue,
       ),
-      home: RegisterScreen(),
+      home: SignInScreen(),
       routes: {
         HomePage.routeName: (ctx) => HomePage(),
         SignInScreen.routeName: (ctx) => SignInScreen(),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
+        ResetPassword.routeName: (ctx) => ResetPassword(),
       },
     );
   }

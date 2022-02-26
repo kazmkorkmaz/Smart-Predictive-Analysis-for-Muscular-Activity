@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/login.dart';
+
 import 'package:mobileapp/services/auth_firebase.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -36,6 +37,25 @@ class RegisterScreen extends StatelessWidget {
       );
     }
 
+    void showInfoDialog(String message) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('E-mail verification!'),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Okay'),
+              onPressed: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(SignInScreen.routeName);
+              },
+            )
+          ],
+        ),
+      );
+    }
+
     void register() async {
       if (passwordText.text != cpasswordText.text) {
         message = 'Passwords are not match!';
@@ -45,7 +65,13 @@ class RegisterScreen extends StatelessWidget {
         User? user = FirebaseAuth.instance.currentUser;
         print(result);
         if (user != null) {
-          Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+          if (!user.emailVerified) {
+            await auth.sendVerificationMail();
+            showInfoDialog(
+                'Please check your e-mail for verification! if you didn\'nt see the e-mail, check your spam box.');
+          } else {
+            Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+          }
         } else {
           message = result.toString();
           showErrorDialog(message);
