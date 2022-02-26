@@ -40,12 +40,8 @@ class SignInScreen extends StatelessWidget {
       if (user != null && user.emailVerified) {
         Navigator.of(context).pushReplacementNamed(HomePage.routeName);
       } else {
-        if (!user!.emailVerified) {
-          showErrorDialog('Please verify email');
-        } else {
-          message = result.toString();
-          showErrorDialog(message);
-        }
+        message = result.toString();
+        showErrorDialog(message);
       }
     }
 

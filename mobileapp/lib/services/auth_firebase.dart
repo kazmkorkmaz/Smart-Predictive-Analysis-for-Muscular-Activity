@@ -81,6 +81,18 @@ class AuthenticationService {
   Future sendResetPasswordEmail(email) async {
     try {
       return await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      var message = '';
+      if (e.code == 'user-not-found') {
+        message = 'There is no user corresponding to the email address!';
+        return message;
+      } else if (e.code == 'invalid-email') {
+        message = 'The email address is not valid.';
+        return message;
+      } else {
+        message = e.code.toString();
+        return message;
+      }
     } catch (e) {
       return 'An Error Occurred!';
     }

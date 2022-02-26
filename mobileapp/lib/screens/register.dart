@@ -63,7 +63,6 @@ class RegisterScreen extends StatelessWidget {
       } else {
         dynamic result = await auth.register(emailText.text, passwordText.text);
         User? user = FirebaseAuth.instance.currentUser;
-        print(result);
         if (user != null) {
           if (!user.emailVerified) {
             await auth.sendVerificationMail();

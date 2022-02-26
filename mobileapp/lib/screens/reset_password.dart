@@ -18,11 +18,28 @@ class ResetPassword extends StatelessWidget {
           content: Text(message),
           actions: <Widget>[
             FlatButton(
-              child:
-                  Text('Password reset email sended. Please check your email.'),
+              child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context)
                     .pushReplacementNamed(SignInScreen.routeName);
+              },
+            )
+          ],
+        ),
+      );
+    }
+
+    void showErrDialog(String message) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('An Error Occured!'),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
               },
             )
           ],
@@ -67,10 +84,20 @@ class ResetPassword extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   color: Colors.blueAccent,
-                  onPressed: () {
-                    auth.sendResetPasswordEmail(email.text.trim());
-                    Navigator.of(context)
-                        .pushReplacementNamed(SignInScreen.routeName);
+                  onPressed: () async {
+                    if (email.text.isEmpty) {
+                      showErrDialog('Email text is empty!');
+                    } else {
+                      dynamic result =
+                          await auth.sendResetPasswordEmail(email.text.trim());
+                      print(result);
+                      if (result == null) {
+                        showInfoDialog(
+                            'Password reset email sended. Please check your email.');
+                      } else {
+                        showErrDialog(result);
+                      }
+                    }
                   },
                   child: Text(
                     'Send E-mail',
