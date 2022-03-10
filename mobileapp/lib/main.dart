@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/login.dart';
 import 'package:mobileapp/screens/register.dart';
 import 'package:mobileapp/screens/reset_password.dart';
+import 'package:mobileapp/screens/splash_screen.dart';
+import 'package:mobileapp/screens/user_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +26,14 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.orange,
         primarySwatch: Colors.blue,
       ),
-      home: SignInScreen(),
+      home: SplashScreen(),
       routes: {
         HomePage.routeName: (ctx) => HomePage(),
         SignInScreen.routeName: (ctx) => SignInScreen(),
         RegisterScreen.routeName: (ctx) => RegisterScreen(),
         ResetPassword.routeName: (ctx) => ResetPassword(),
+        UserInfoScreen.routeName: (ctx) => UserInfoScreen(),
+        SplashScreen.routeName: (ctx) => SplashScreen(),
       },
     );
   }

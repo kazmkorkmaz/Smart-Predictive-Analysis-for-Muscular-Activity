@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/login.dart';
+import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -36,7 +37,7 @@ class MainDrawer extends StatelessWidget {
             onTap: () {
               auth.signOut();
               Navigator.of(context)
-                  .pushReplacementNamed(SignInScreen.routeName);
+                  .pushReplacementNamed(SplashScreen.routeName);
             },
           ),
         ],

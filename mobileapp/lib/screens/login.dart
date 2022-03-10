@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/register.dart';
 import 'package:mobileapp/screens/reset_password.dart';
+import 'package:mobileapp/screens/user_info.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -35,10 +37,25 @@ class SignInScreen extends StatelessWidget {
 
     void signIn() async {
       dynamic result = await auth.signIn(emailText.text, passwordText.text);
-      User? user = FirebaseAuth.instance.currentUser;
+      FirebaseAuth _auth = FirebaseAuth.instance;
 
-      if (user != null && user.emailVerified) {
-        Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+      if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
+        FirebaseFirestore.instance
+            .collection('User')
+            .doc(_auth.currentUser!.uid)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+            var name = documentSnapshot.get('name');
+            print(name);
+            if (name == null) {
+              Navigator.of(context)
+                  .pushReplacementNamed(UserInfoScreen.routeName);
+            } else {
+              Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+            }
+          }
+        });
       } else {
         message = result.toString();
         showErrorDialog(message);

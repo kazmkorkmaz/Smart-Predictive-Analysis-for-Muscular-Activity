@@ -1,16 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../models/User.dart';
 
 class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  String get currentUser {
-    return _auth.currentUser!.uid;
-  }
+  final userRef = FirebaseFirestore.instance
+      .collection('User')
+      .withConverter<UserInformations>(
+        fromFirestore: (snapshot, _) =>
+            UserInformations.fromJson(snapshot.data()!),
+        toFirestore: (user, _) => user.toJson(),
+      );
 
   Future register(String email, String password) async {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
+
+      await userRef.doc(_auth.currentUser!.uid).set(UserInformations(
+          id: _auth.currentUser!.uid,
+          email: _auth.currentUser!.email as String,
+          registerDate: DateTime.now()));
+      //await sendVerificationMail();
+
       return userCredential.additionalUserInfo!.isNewUser;
     } on FirebaseAuthException catch (e) {
       var message = '';
