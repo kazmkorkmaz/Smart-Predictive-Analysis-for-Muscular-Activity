@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomWidget(),
       floatingActionButton: FloatingAction(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: MainDrawer(),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobileapp/services/user_firebase.dart';
 
 import '../models/User.dart';
 
@@ -7,24 +9,17 @@ class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  final userRef = FirebaseFirestore.instance
-      .collection('User')
-      .withConverter<UserInformations>(
-        fromFirestore: (snapshot, _) =>
-            UserInformations.fromJson(snapshot.data()!),
-        toFirestore: (user, _) => user.toJson(),
-      );
+  UserService userService = UserService();
 
   Future register(String email, String password) async {
     try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
-
-      await userRef.doc(_auth.currentUser!.uid).set(UserInformations(
-          id: _auth.currentUser!.uid,
-          email: _auth.currentUser!.email as String,
-          registerDate: DateTime.now()));
-      //await sendVerificationMail();
+      final rgr = formatDate(DateTime.now(), [dd, '-', mm, '-', yyyy]);
+      await userService.addUser(
+          _auth.currentUser!.uid, _auth.currentUser!.email as String, rgr);
+      await userService.addBody(
+          0, 0, 0, 0, 0, 0, 0, 0, 0, DateTime.now().toLocal());
 
       return userCredential.additionalUserInfo!.isNewUser;
     } on FirebaseAuthException catch (e) {

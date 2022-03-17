@@ -1,11 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/models/User.dart';
-import 'package:mobileapp/screens/home_page.dart';
+import 'package:intl/intl.dart';
+import 'package:mobileapp/commons/dialog.dart';
+import 'package:mobileapp/services/user_firebase.dart';
 
 class UserInfoScreen extends StatefulWidget {
   static const routeName = '/UserInformations';
+
   @override
   State<UserInfoScreen> createState() => _UserInfoScreenState();
 }
@@ -14,6 +14,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController surName = TextEditingController();
   TextEditingController date = TextEditingController();
+  DateTime? dateF;
+  UserService userService = UserService();
+  MyDialog dialog = MyDialog();
 
   String? gender;
   final genderItems = ['Male', 'Female', 'Others'];
@@ -31,56 +34,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       DropdownMenuItem(value: item, child: Text(item));
   DropdownMenuItem<String> toboccoMenuItem(String item) =>
       DropdownMenuItem(value: item, child: Text(item));
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  final userRef = FirebaseFirestore.instance
-      .collection('User')
-      .withConverter<UserInformations>(
-        fromFirestore: (snapshot, _) =>
-            UserInformations.fromJson(snapshot.data()!),
-        toFirestore: (user, _) => user.toJson(),
-      );
-
-  Future updateUser() async {
-    try {
-      await userRef
-          .doc(_auth.currentUser!.uid)
-          .update({
-            'name': name.text.toLowerCase(),
-            'surname': surName.text.toLowerCase(),
-            'gender': gender!.toLowerCase(),
-            'dateofBirth': date.text.toString(),
-            'alcohol': alcohol!.toLowerCase(),
-            'tobocco': tobocco!.toLowerCase(),
-          })
-          .then((value) =>
-              Navigator.of(context).pushReplacementNamed(HomePage.routeName))
-          .onError((error, stackTrace) =>
-              showErrorDialog('An error occured! Please try again.'));
-    } catch (e) {
-      showErrorDialog('An error occured! Please try again');
-    }
-  }
-
-  void showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('An Error Occurred!'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
-    );
-  }
-
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,13 +50,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             children: [
               SizedBox(
                 height: 10,
-              ),
-              Center(
-                child: Text(
-                    'Before you continue, we need more information about you.'),
-              ),
-              SizedBox(
-                height: 100,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -138,6 +85,25 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       labelText: 'Birthday',
                       prefixIcon: Icon(Icons.date_range),
                       border: OutlineInputBorder()),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime(2000),
+                        firstDate: DateTime(1970),
+                        lastDate: DateTime(2022));
+
+                    if (pickedDate != null) {
+                      String formattedDate =
+                          DateFormat('dd-MM-yyyy').format(pickedDate);
+                      setState(() {
+                        date.text = formattedDate;
+                        dateF = pickedDate;
+                      });
+                    } else {
+                      print("Date is not selected");
+                    }
+                  },
                 ),
               ),
               Padding(
@@ -193,7 +159,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   ),
                   color: Colors.blueAccent,
                   onPressed: () {
-                    updateUser();
+                    userService.updateUser(name.text, surName.text, gender!,
+                        dateF!, alcohol!, tobocco!, context);
                   },
                   child: Text(
                     'Continue',

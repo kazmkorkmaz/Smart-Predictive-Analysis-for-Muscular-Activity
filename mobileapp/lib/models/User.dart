@@ -4,11 +4,11 @@ class UserInformations {
   final String? surname;
   final String email;
   final String? gender;
-  final DateTime registerDate;
-  final DateTime? dateofBirth;
+  final String registerDate;
+  final String? dateofBirth;
   final String? alcohol;
   final String? tobocco;
-
+  final String? age;
   UserInformations({
     required this.id,
     this.name,
@@ -19,6 +19,7 @@ class UserInformations {
     this.dateofBirth,
     this.alcohol,
     this.tobocco,
+    this.age,
   });
 
   UserInformations.fromJson(Map<String, Object?> json)
@@ -28,10 +29,11 @@ class UserInformations {
           surname: json['surname']! as String,
           email: json['email']! as String,
           gender: json['gender']! as String,
-          registerDate: json['registerDate']! as DateTime,
-          dateofBirth: json['dateofBirth']! as DateTime,
+          registerDate: json['registerDate']! as String,
+          dateofBirth: json['dateofBirth']! as String,
           alcohol: json['alcohol']! as String,
           tobocco: json['tobocco']! as String,
+          age: json['age']! as String,
         );
 
   Map<String, Object?> toJson() {
@@ -45,6 +47,7 @@ class UserInformations {
       'dateofBirth': dateofBirth,
       'alcohol': alcohol,
       'tobocco': tobocco,
+      'age': age,
     };
   }
 }

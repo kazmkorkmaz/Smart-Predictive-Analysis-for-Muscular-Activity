@@ -1,12 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
+import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 import 'package:mobileapp/screens/home_page.dart';
-import 'package:mobileapp/screens/login.dart';
-import 'package:mobileapp/screens/register.dart';
-import 'package:mobileapp/screens/reset_password.dart';
+import 'package:mobileapp/screens/Auth/login.dart';
+import 'package:mobileapp/screens/Profile/profile.dart';
+import 'package:mobileapp/screens/Auth/register.dart';
+import 'package:mobileapp/screens/Auth/reset_password.dart';
 import 'package:mobileapp/screens/splash_screen.dart';
-import 'package:mobileapp/screens/user_info.dart';
+import 'package:mobileapp/screens/BodyMeasurements/update_body_measurements.dart';
+import 'package:mobileapp/screens/Profile/user_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         backgroundColor: Colors.orange,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: SplashScreen(),
       routes: {
@@ -34,6 +37,10 @@ class MyApp extends StatelessWidget {
         ResetPassword.routeName: (ctx) => ResetPassword(),
         UserInfoScreen.routeName: (ctx) => UserInfoScreen(),
         SplashScreen.routeName: (ctx) => SplashScreen(),
+        ProfilePage.routeName: (ctx) => ProfilePage(),
+        BodyMeasurements.routeName: (ctx) => BodyMeasurements(),
+        UpdateBodyMeasurements.routeName: (ctx) => UpdateBodyMeasurements(),
+        BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
       },
     );
   }

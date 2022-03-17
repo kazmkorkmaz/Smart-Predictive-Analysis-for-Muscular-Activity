@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/login.dart';
+import 'package:mobileapp/screens/Auth/login.dart';
+import 'package:mobileapp/screens/Profile/profile.dart';
 import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
+import 'package:mobileapp/services/user_firebase.dart';
 
 class MainDrawer extends StatelessWidget {
   AuthenticationService auth = AuthenticationService();
@@ -21,7 +23,8 @@ class MainDrawer extends StatelessWidget {
             title: const Text('Profile'),
             leading: Icon(Icons.person),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(ProfilePage.routeName);
             },
           ),
           ListTile(
