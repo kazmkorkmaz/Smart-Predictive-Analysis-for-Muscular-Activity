@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screens/Blue/FindDevicesScreen.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 import 'package:mobileapp/screens/home_page.dart';
@@ -10,6 +11,7 @@ import 'package:mobileapp/screens/Auth/reset_password.dart';
 import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/screens/BodyMeasurements/update_body_measurements.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
+import 'package:mobileapp/widgets/checkBlueState.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
         BodyMeasurements.routeName: (ctx) => BodyMeasurements(),
         UpdateBodyMeasurements.routeName: (ctx) => UpdateBodyMeasurements(),
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
+        CheckBlueState.routeName: (ctx) => CheckBlueState(),
       },
     );
   }

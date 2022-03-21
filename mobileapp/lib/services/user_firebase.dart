@@ -5,7 +5,6 @@ import 'package:mobileapp/commons/dialog.dart';
 import 'package:mobileapp/models/User.dart';
 import 'package:mobileapp/models/body_measurements.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
-import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 
 class UserService {
