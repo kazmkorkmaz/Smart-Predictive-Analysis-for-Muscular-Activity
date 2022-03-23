@@ -42,6 +42,8 @@ dependencies:
   intl: ^0.17.0
   flutter_blue: ^0.8.0
   flutter_bluetooth_serial: ^0.4.0
+  syncfusion_flutter_charts: ^19.4.56
+  font_awesome_flutter: ^10.0.0
 
 dev_dependencies:
   flutter_test:

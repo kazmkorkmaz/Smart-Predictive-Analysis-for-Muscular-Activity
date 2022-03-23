@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/models/body_measurements.dart';
+import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/services/user_firebase.dart';
 
@@ -51,8 +53,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.weight,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -68,8 +70,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.straight,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -85,8 +87,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -102,8 +104,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -119,8 +121,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -136,8 +138,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -153,8 +155,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.boy_rounded,
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
                       size: 35,
                     ),
                     SizedBox(width: 20),
@@ -168,13 +170,18 @@ class BodyMeasurementsWidget extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(BodyGraph.routeName);
+                      },
+                      child: Text(
+                        'See on the graph',
+                        style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blueAccent,
+                    ),
+                    RaisedButton(
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(BodyMeasurementsHistory.routeName);

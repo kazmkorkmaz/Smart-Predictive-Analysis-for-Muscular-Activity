@@ -126,10 +126,6 @@ class SignInScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: Colors.blueAccent,
                   onPressed: signIn,
                   child: Text(
                     'Sign In',

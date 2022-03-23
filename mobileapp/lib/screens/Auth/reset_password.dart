@@ -80,10 +80,6 @@ class ResetPassword extends StatelessWidget {
                 minWidth: 150,
                 height: 45,
                 child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: Colors.blueAccent,
                   onPressed: () async {
                     if (email.text.isEmpty) {
                       showErrDialog('Email text is empty!');

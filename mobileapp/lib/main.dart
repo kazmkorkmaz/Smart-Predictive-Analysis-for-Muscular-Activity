@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/Blue/FindDevicesScreen.dart';
+import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 import 'package:mobileapp/screens/home_page.dart';
@@ -12,6 +13,7 @@ import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/screens/BodyMeasurements/update_body_measurements.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
 import 'package:mobileapp/widgets/checkBlueState.dart';
+import 'package:mobileapp/widgets/drawer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +30,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        backgroundColor: Colors.orange,
-        primarySwatch: Colors.orange,
-      ),
+          primarySwatch: Colors.orange,
+          accentColor: Colors.orangeAccent,
+          buttonTheme: ButtonThemeData(
+              buttonColor: Color.fromARGB(255, 255, 145, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              textTheme: ButtonTextTheme.normal,
+              padding: EdgeInsets.all(8))),
       home: SplashScreen(),
       routes: {
         HomePage.routeName: (ctx) => HomePage(),
@@ -44,6 +52,7 @@ class MyApp extends StatelessWidget {
         UpdateBodyMeasurements.routeName: (ctx) => UpdateBodyMeasurements(),
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
         CheckBlueState.routeName: (ctx) => CheckBlueState(),
+        BodyGraph.routeName: (ctx) => BodyGraph(),
       },
     );
   }

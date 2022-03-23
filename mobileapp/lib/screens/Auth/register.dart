@@ -46,7 +46,8 @@ class RegisterScreen extends StatelessWidget {
           actions: <Widget>[
             FlatButton(
               child: Text('Okay'),
-              onPressed: () {
+              onPressed: () async {
+                await auth.signOut();
                 Navigator.of(context)
                     .pushReplacementNamed(SignInScreen.routeName);
               },
@@ -141,10 +142,6 @@ class RegisterScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 child: Builder(builder: (ctx) {
                   return RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    color: Colors.blueAccent,
                     onPressed: register,
                     child: Text(
                       'Sign Up',

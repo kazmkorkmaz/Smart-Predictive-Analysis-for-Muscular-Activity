@@ -74,37 +74,6 @@ class UserService {
     return userRef.data();
   }
 
-  Future addBody(
-    double height,
-    double weight,
-    double arm,
-    double chest,
-    double shoulder,
-    double tobocco,
-    double waist,
-    double hipst,
-    double thigh,
-    DateTime createdAt,
-  ) async {
-    DateTime date = DateTime.now().toLocal();
-    var dateOfBody = '${date.day}-${date.month}-${date.year}';
-    await bodyRef
-        .doc(_auth.currentUser!.uid)
-        .collection('BodyMeasurements')
-        .doc(dateOfBody)
-        .set({
-      'height': height,
-      'weight': weight,
-      'arm': arm,
-      'chest': chest,
-      'shoulder': shoulder,
-      'waist': waist,
-      'hipst': hipst,
-      'thigh': thigh,
-      'createdAt': createdAt,
-    });
-  }
-
   Future updateBody(
       double height,
       double weight,
@@ -117,8 +86,7 @@ class UserService {
       BuildContext context) async {
     try {
       DateTime date = DateTime.now().toLocal();
-      var dateOfBody =
-          '${date.day}-${date.month}-${date.year}->${date.hour}:${date.minute}:${date.second}';
+      var dateOfBody = '${date.day}-${date.month}-${date.year}';
       await bodyRef
           .doc(_auth.currentUser!.uid)
           .collection('BodyMeasurements')
@@ -132,7 +100,7 @@ class UserService {
             'waist': waist,
             'hipst': hipst,
             'thigh': thigh,
-            'createdAt': DateTime.now().toLocal(),
+            'createdAt': date,
           })
           .then((value) =>
               Navigator.of(context).pushReplacementNamed(ProfilePage.routeName))

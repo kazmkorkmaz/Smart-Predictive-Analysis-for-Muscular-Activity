@@ -18,8 +18,6 @@ class AuthenticationService {
       final rgr = formatDate(DateTime.now(), [dd, '-', mm, '-', yyyy]);
       await userService.addUser(
           _auth.currentUser!.uid, _auth.currentUser!.email as String, rgr);
-      await userService.addBody(
-          0, 0, 0, 0, 0, 0, 0, 0, 0, DateTime.now().toLocal());
 
       return userCredential.additionalUserInfo!.isNewUser;
     } on FirebaseAuthException catch (e) {

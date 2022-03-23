@@ -154,10 +154,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: Colors.blueAccent,
                   onPressed: () {
                     userService.updateUser(name.text, surName.text, gender!,
                         dateF!, alcohol!, tobocco!, context);

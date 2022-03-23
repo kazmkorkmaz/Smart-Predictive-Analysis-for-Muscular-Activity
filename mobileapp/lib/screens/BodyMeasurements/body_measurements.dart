@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/services/user_firebase.dart';
 
 class BodyMeasurements extends StatelessWidget {
@@ -43,7 +44,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Height',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.height),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -55,7 +56,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Weight',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.weight),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -67,7 +68,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Arm',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -79,7 +80,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Chest',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -91,7 +92,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Shoulder',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -103,7 +104,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Waist',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -115,7 +116,7 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Hipst',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
@@ -127,17 +128,13 @@ class BodyMeasurements extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Thigh',
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: Colors.blueAccent,
                   onPressed: () {
                     userService.updateBody(
                       double.parse(height.text),

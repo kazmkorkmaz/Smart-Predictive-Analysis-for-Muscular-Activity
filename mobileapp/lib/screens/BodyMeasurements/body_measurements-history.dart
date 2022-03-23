@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/commons/dialog.dart';
 import 'package:mobileapp/services/user_firebase.dart';
 
@@ -30,15 +31,14 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Column(
-              children: [
-                Column(
-                  children: [
-                    CircularProgressIndicator(),
-                    Text('Loading...'),
-                  ],
-                ),
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  Text('Loading...'),
+                ],
+              ),
             );
           }
           final dataList = snapshot.data!.docs.toList();
@@ -89,8 +89,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.weight,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -106,8 +106,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.straight,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -123,8 +123,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -140,8 +140,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -157,8 +157,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -174,8 +174,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),
@@ -191,8 +191,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.boy_rounded,
+                              FaIcon(
+                                FontAwesomeIcons.dumbbell,
                                 size: 35,
                               ),
                               SizedBox(width: 20),

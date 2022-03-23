@@ -204,10 +204,6 @@ class ProfilePage extends StatelessWidget {
                               ),
                               BodyMeasurementsWidget(),
                               RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                color: Colors.blueAccent,
                                 onPressed: () {
                                   Navigator.of(context).pushNamed(
                                       UpdateBodyMeasurements.routeName);
