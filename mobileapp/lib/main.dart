@@ -5,6 +5,8 @@ import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/Training/training_four.dart';
+import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/Auth/login.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 import 'package:mobileapp/screens/Auth/register.dart';
@@ -12,6 +14,8 @@ import 'package:mobileapp/screens/Auth/reset_password.dart';
 import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/screens/BodyMeasurements/update_body_measurements.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
+import 'package:mobileapp/screens/Training/training_three.dart';
+import 'package:mobileapp/screens/Training/training_two.dart';
 import 'package:mobileapp/widgets/checkBlueState.dart';
 import 'package:mobileapp/widgets/drawer.dart';
 
@@ -53,6 +57,10 @@ class MyApp extends StatelessWidget {
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
         CheckBlueState.routeName: (ctx) => CheckBlueState(),
         BodyGraph.routeName: (ctx) => BodyGraph(),
+        TrainingOne.routeName: (ctx) => TrainingOne(),
+        TrainingInfo.routeName: (ctx) => TrainingInfo(),
+        TrainingThree.routeName: (ctx) => TrainingThree(),
+        TraningFinish.routeName: (ctx) => TraningFinish(),
       },
     );
   }

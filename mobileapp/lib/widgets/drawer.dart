@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/Auth/login.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
 
@@ -58,6 +59,14 @@ class MainDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(ProfilePage.routeName);
+            },
+          ),
+          ListTile(
+            title: const Text('Training'),
+            leading: Icon(Icons.fitness_center),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(TrainingOne.routeName);
             },
           ),
           ListTile(

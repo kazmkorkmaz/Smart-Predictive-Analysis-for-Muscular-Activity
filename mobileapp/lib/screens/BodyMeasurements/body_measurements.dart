@@ -29,12 +29,21 @@ class BodyMeasurements extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Center(
-                child: Text(
-                    'Before you continue, we need more information about your body measurements.'),
-              ),
-              SizedBox(
-                height: 100,
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Please enter your body measurements',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      'before starting',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -43,7 +52,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Height',
+                      labelText: 'Height(cm)',
                       prefixIcon: Icon(Icons.height),
                       border: OutlineInputBorder()),
                 ),
@@ -55,7 +64,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Weight',
+                      labelText: 'Weight(kg)',
                       prefixIcon: Icon(FontAwesomeIcons.weight),
                       border: OutlineInputBorder()),
                 ),
@@ -67,7 +76,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Arm',
+                      labelText: 'Arm(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
@@ -79,7 +88,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Chest',
+                      labelText: 'Chest(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
@@ -91,7 +100,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Shoulder',
+                      labelText: 'Shoulder(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
@@ -103,7 +112,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Waist',
+                      labelText: 'Waist(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
@@ -115,7 +124,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Hipst',
+                      labelText: 'Hipst(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),
@@ -127,7 +136,7 @@ class BodyMeasurements extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                      labelText: 'Thigh',
+                      labelText: 'Thigh(cm)',
                       prefixIcon: Icon(FontAwesomeIcons.dumbbell),
                       border: OutlineInputBorder()),
                 ),

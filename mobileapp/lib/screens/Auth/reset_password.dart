@@ -54,15 +54,40 @@ class ResetPassword extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.all(16),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 15,
+              ),
+              CircleAvatar(
+                radius: 48,
+                backgroundColor: Colors.white,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(48),
+                    child:
+                        Image.asset('lib/assets/images/bee-strong-avatar.png')),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Center(
+                child: Text(
+                  'Bee Strong!',
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
               Text(
-                'Text your e-mail for reset your password',
+                'Text your e-mail for reset your password.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(
-                height: 15,
+                height: 25,
               ),
               TextField(
                 controller: email,
@@ -74,11 +99,9 @@ class ResetPassword extends StatelessWidget {
                     border: OutlineInputBorder()),
               ),
               SizedBox(
-                height: 10,
+                height: 25,
               ),
               ButtonTheme(
-                minWidth: 150,
-                height: 45,
                 child: RaisedButton(
                   onPressed: () async {
                     if (email.text.isEmpty) {

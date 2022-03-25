@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/Auth/login.dart';
 
 import 'package:mobileapp/services/auth_firebase.dart';
@@ -89,16 +90,27 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 100,
               ),
+              CircleAvatar(
+                radius: 48,
+                backgroundColor: Colors.white,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(48),
+                    child:
+                        Image.asset('lib/assets/images/bee-strong-avatar.png')),
+              ),
+              SizedBox(
+                height: 35,
+              ),
               Center(
                 child: Text(
-                  'Sign Up',
+                  'Bee Strong!',
                   style: TextStyle(
                     fontSize: 30,
                   ),
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 35,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -158,8 +170,9 @@ class RegisterScreen extends StatelessWidget {
                     const Text('Already Have an account?'),
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(SignInScreen.routeName);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              SignInScreen.routeName,
+                              (Route<dynamic> route) => false);
                         },
                         child: const Text('Sign In')),
                   ],

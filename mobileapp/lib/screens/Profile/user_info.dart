@@ -52,6 +52,25 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 height: 10,
               ),
               Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Please enter these personal information',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      'before starting',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: name,

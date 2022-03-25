@@ -34,9 +34,10 @@ class ProfilePage extends StatelessWidget {
                                 radius: 64,
                                 backgroundColor: Colors.white,
                                 child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Image.asset(
-                                        'lib/assets/images/bee-strong-avatar.png')),
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Image.asset(
+                                      'lib/assets/images/bee-strong-avatar.png'),
+                                ),
                               ),
                               SizedBox(
                                 height: 15,

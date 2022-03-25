@@ -6,6 +6,8 @@ import 'package:mobileapp/models/User.dart';
 import 'package:mobileapp/models/body_measurements.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
+import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/Training/training_one.dart';
 
 class UserService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -92,20 +94,20 @@ class UserService {
           .collection('BodyMeasurements')
           .doc(dateOfBody)
           .set({
-            'height': height,
-            'weight': weight,
-            'arm': arm,
-            'chest': chest,
-            'shoulder': shoulder,
-            'waist': waist,
-            'hipst': hipst,
-            'thigh': thigh,
-            'createdAt': date,
-          })
-          .then((value) =>
-              Navigator.of(context).pushReplacementNamed(ProfilePage.routeName))
-          .onError((error, stackTrace) =>
-              dialog.showErrorDialog('An error occured! Please try ', context));
+        'height': height,
+        'weight': weight,
+        'arm': arm,
+        'chest': chest,
+        'shoulder': shoulder,
+        'waist': waist,
+        'hipst': hipst,
+        'thigh': thigh,
+        'createdAt': date,
+      }).then((value) => Navigator.of(context)
+              .pushNamedAndRemoveUntil(
+                  HomePage.routeName, (Route<dynamic> route) => false)
+              .onError((error, stackTrace) => dialog.showErrorDialog(
+                  'An error occured! Please try ', context)));
     } catch (e) {
       dialog.showErrorDialog('An error occured! Please try again', context);
     }
