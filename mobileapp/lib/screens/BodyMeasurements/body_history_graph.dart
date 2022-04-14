@@ -39,7 +39,7 @@ class _BodyGraphState extends State<BodyGraph> {
                 .map((documentSnapshot) => BodyMeasurementsInfo.fromMap(
                     documentSnapshot.data() as Map<String, dynamic>))
                 .toList();
-            print(dataList);
+
             return Column(children: [
               //Initialize the chart widget
               SfCartesianChart(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/widgets/drawer.dart';
+import 'package:mobileapp/widgets/floating_action.dart';
 import 'package:mobileapp/widgets/home_page/home_bodyMeasurements.dart';
 import 'package:mobileapp/widgets/home_page/home_training.dart';
 import 'package:mobileapp/widgets/home_page/home_trainingreports.dart';
@@ -25,6 +26,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingAction(),
       drawer: MainDrawer(),
     );
   }

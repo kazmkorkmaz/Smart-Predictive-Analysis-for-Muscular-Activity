@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
 import 'package:mobileapp/widgets/checkBlueState.dart';
 
 class FloatingAction extends StatelessWidget {
@@ -9,7 +10,7 @@ class FloatingAction extends StatelessWidget {
       height: 80,
       child: new FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(CheckBlueState.routeName);
+          Navigator.of(context).pushNamed(MainPage.routeName);
         },
         child: new Icon(
           Icons.bluetooth,

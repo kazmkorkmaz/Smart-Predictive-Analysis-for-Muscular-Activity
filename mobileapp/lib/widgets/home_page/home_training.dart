@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
 
 class HomeTraining extends StatelessWidget {
@@ -6,7 +7,7 @@ class HomeTraining extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(TrainingOne.routeName);
+        Navigator.of(context).pushNamed(MainPage.routeName);
       },
       child: Card(
         shape: RoundedRectangleBorder(

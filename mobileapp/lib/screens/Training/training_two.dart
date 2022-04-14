@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/screens/Training/training_four.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
@@ -112,8 +113,13 @@ class _TrainingInfoState extends State<TrainingInfo> {
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(TrainingThree.routeName);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return TrainingThree(server: muscle.server);
+                            },
+                          ),
+                        );
                       },
                       child: Text(
                         'Start',
@@ -128,8 +134,13 @@ class _TrainingInfoState extends State<TrainingInfo> {
                       children: [
                         RaisedButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(TrainingThree.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return TrainingThree(server: muscle.server);
+                                },
+                              ),
+                            );
                           },
                           child: Text(
                             'End Training',

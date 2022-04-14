@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/Training/training_two.dart';
 
 class MuscleCart extends StatelessWidget {
-  const MuscleCart({Key? key, required this.muscle}) : super(key: key);
+  final BluetoothDevice server;
+  const MuscleCart({Key? key, required this.muscle, required this.server})
+      : super(key: key);
   final Muscle muscle;
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,11 @@ class MuscleCart extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           TrainingInfo.routeName,
-          arguments: Muscle(name: muscle.name, image: muscle.image),
+          arguments: Muscle(
+            name: muscle.name,
+            image: muscle.image,
+            server: server,
+          ),
         );
       },
       child: Card(

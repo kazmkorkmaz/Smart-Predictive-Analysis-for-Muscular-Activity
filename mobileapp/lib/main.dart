@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/Blue/FindDevicesScreen.dart';
+import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
@@ -17,7 +17,6 @@ import 'package:mobileapp/screens/Profile/user_info.dart';
 import 'package:mobileapp/screens/Training/training_three.dart';
 import 'package:mobileapp/screens/Training/training_two.dart';
 import 'package:mobileapp/widgets/checkBlueState.dart';
-import 'package:mobileapp/widgets/drawer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,10 +56,9 @@ class MyApp extends StatelessWidget {
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
         CheckBlueState.routeName: (ctx) => CheckBlueState(),
         BodyGraph.routeName: (ctx) => BodyGraph(),
-        TrainingOne.routeName: (ctx) => TrainingOne(),
-        TrainingInfo.routeName: (ctx) => TrainingInfo(),
-        TrainingThree.routeName: (ctx) => TrainingThree(),
         TraningFinish.routeName: (ctx) => TraningFinish(),
+        TrainingInfo.routeName: (ctx) => TrainingInfo(),
+        MainPage.routeName: (ctx) => MainPage(),
       },
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
-import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
 
 class HomeBody extends StatelessWidget {
   @override

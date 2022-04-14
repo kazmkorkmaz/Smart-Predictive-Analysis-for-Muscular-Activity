@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/Profile/profile.dart';
 
 class HomeWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? text;
-    int date = DateTime.now().hour;
+    int date = DateTime.now().hour + 3;
+
     if (date < 12 && date > 6) {
       text = 'Good Morning';
     } else if (date >= 12 && date <= 17) {
