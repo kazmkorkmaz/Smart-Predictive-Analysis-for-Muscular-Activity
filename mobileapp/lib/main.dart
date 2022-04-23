@@ -56,7 +56,6 @@ class MyApp extends StatelessWidget {
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
         CheckBlueState.routeName: (ctx) => CheckBlueState(),
         BodyGraph.routeName: (ctx) => BodyGraph(),
-        TraningFinish.routeName: (ctx) => TraningFinish(),
         TrainingInfo.routeName: (ctx) => TrainingInfo(),
         MainPage.routeName: (ctx) => MainPage(),
       },

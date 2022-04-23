@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
+import 'package:mobileapp/screens/home_page.dart';
 import './DiscoveryPage.dart';
 import './SelectBondedDevicePage.dart';
 
@@ -90,7 +91,7 @@ class _MainPage extends State<MainPage> {
         child: ListView(
           children: <Widget>[
             Divider(),
-            ListTile(title: const Text('General')),
+            ListTile(title: const Text('General Settings For Device')),
             SwitchListTile(
               title: const Text('Enable Bluetooth'),
               value: _bluetoothState.isEnabled,
@@ -165,7 +166,7 @@ class _MainPage extends State<MainPage> {
             ),
             ListTile(
               title: ElevatedButton(
-                child: const Text('Connect to paired device to chat'),
+                child: const Text('Connect to device'),
                 onPressed: () async {
                   final BluetoothDevice? selectedDevice =
                       await Navigator.of(context).push(
@@ -196,7 +197,7 @@ class _MainPage extends State<MainPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return TrainingOne(server: server);
+          return HomePage(server: server);
         },
       ),
     );
