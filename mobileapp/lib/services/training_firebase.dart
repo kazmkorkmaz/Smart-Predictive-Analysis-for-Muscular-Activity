@@ -27,6 +27,30 @@ class TrainingService {
           .doc(_auth.currentUser!.uid)
           .collection('Trainings')
           .doc(nameOfTrainings)
+          .set({'createdAt': DateTime.now()});
+      await firestore
+          .collection('User')
+          .doc(_auth.currentUser!.uid)
+          .collection('Trainings')
+          .doc(nameOfTrainings)
+          .collection('MuscleGroup')
+          .doc(muscleName)
+          .set({'muscleName': muscleName});
+      await firestore
+          .collection('User')
+          .doc(_auth.currentUser!.uid)
+          .collection('Trainings')
+          .doc(nameOfTrainings)
+          .collection('MuscleGroup')
+          .doc(muscleName)
+          .collection('ExerciseName')
+          .doc(exerciseName)
+          .set({'exerciseName': exerciseName});
+      await firestore
+          .collection('User')
+          .doc(_auth.currentUser!.uid)
+          .collection('Trainings')
+          .doc(nameOfTrainings)
           .collection('MuscleGroup')
           .doc(muscleName)
           .collection('ExerciseName')
@@ -53,5 +77,77 @@ class TrainingService {
     } catch (e) {
       dialog.showErrorDialog('An error occured. Please try again!', context);
     }
+  }
+
+  Future<QuerySnapshot> getTraining() async {
+    final datesRef = await FirebaseFirestore.instance
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .get();
+
+    return datesRef;
+  }
+
+  Future<QuerySnapshot> getMusclesGroup(String nameOfTrainings) async {
+    final datesRef = await FirebaseFirestore.instance
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .get();
+
+    return datesRef;
+  }
+
+  Future<QuerySnapshot> getExercise(
+      String nameOfTrainings, String muscleName) async {
+    final datesRef = await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .get();
+
+    return datesRef;
+  }
+
+  Future<QuerySnapshot> getSets(
+      String nameOfTrainings, String muscleName, String exerciseName) async {
+    final datesRef = await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .doc(exerciseName)
+        .collection('Sets')
+        .get();
+
+    return datesRef;
+  }
+
+  Future<DocumentSnapshot> getDatas(String nameOfTrainings, String muscleName,
+      String exerciseName, String setNumber) async {
+    final datesRef = await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .doc(exerciseName)
+        .collection('Sets')
+        .doc(setNumber)
+        .get();
+
+    return datesRef;
   }
 }

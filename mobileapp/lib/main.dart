@@ -4,6 +4,7 @@ import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
+import 'package:mobileapp/screens/TrainingHistory/Trainings.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/Training/training_four.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         BodyGraph.routeName: (ctx) => BodyGraph(),
         TrainingInfo.routeName: (ctx) => TrainingInfo(),
         MainPage.routeName: (ctx) => MainPage(),
+        Trainings.routeName: (ctx) => Trainings(),
       },
     );
   }
