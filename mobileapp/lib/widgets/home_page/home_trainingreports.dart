@@ -1,12 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobileapp/screens/Training/training_one.dart';
+import 'package:mobileapp/services/training_firebase.dart';
 
 class HomeTrainingReports extends StatelessWidget {
+  TrainingService trainingService = TrainingService();
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () async {
+        await trainingService
+            .getDatas('25-4-2022', 'Biceps', 'asd', 'SetNumber-2')
+            .then((value) {
+          trainingService.writeFeatures(value.get('datas').toList());
+        }).onError((error, stackTrace) {
+          print(error);
+        });
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Colors.orangeAccent, width: 1),
@@ -63,3 +73,5 @@ class HomeTrainingReports extends StatelessWidget {
     );
   }
 }
+
+class Documentsnapshot {}

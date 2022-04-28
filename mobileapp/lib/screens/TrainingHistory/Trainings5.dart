@@ -49,6 +49,7 @@ class _Trainings5State extends State<Trainings5> {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
               print(data['datas']);
+
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

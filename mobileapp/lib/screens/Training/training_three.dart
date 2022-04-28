@@ -165,10 +165,10 @@ class _TrainingThreeState extends State<TrainingThree> {
                           padding: const EdgeInsets.all(8.0),
                           child: RaisedButton(
                             onPressed: () {
-                              connection!.close();
                               _sendMessage('c');
                               _sendMessage('c');
                               _sendMessage('c');
+
                               setState(() {
                                 timer?.cancel();
                               });

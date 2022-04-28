@@ -46,6 +46,7 @@ dependencies:
   font_awesome_flutter: ^10.0.0
   scoped_model: ^1.1.0
   stop_watch_timer: ^1.1.0+1
+  cloud_functions: ^3.2.13
 
 dev_dependencies:
   flutter_test:

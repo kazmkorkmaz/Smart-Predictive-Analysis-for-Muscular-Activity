@@ -58,139 +58,143 @@ class _TraningFinishState extends State<TraningFinish> {
       appBar: AppBar(
         title: Text('Set Overview'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    CircleAvatar(
-                        radius: 64,
-                        backgroundColor: Colors.white,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.asset(
-                            widget.muscleImage,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      CircleAvatar(
+                          radius: 64,
+                          backgroundColor: Colors.white,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image.asset(
+                              widget.muscleImage,
+                            ),
+                          )),
+                      SizedBox(height: 10),
+                      Text(widget.muscle),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 250,
+                height: 200,
+                child: SfCartesianChart(series: <ChartSeries>[
+                  // Renders line chart
+                  FastLineSeries<double, int>(
+                      dataSource: widget.datas,
+                      xValueMapper: (datas, _) => i++,
+                      yValueMapper: (datas, _) => datas)
+                ]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: exercise,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: 'Name of the exercise',
+                    prefixIcon: Icon(FontAwesomeIcons.dumbbell),
+                    border: OutlineInputBorder()),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: weight,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: 'Weight',
+                    prefixIcon: Icon(FontAwesomeIcons.weight),
+                    border: OutlineInputBorder()),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: setNumber,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: 'Set Number',
+                    prefixIcon: Icon(FontAwesomeIcons.listNumeric),
+                    border: OutlineInputBorder()),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Status of the user for the training:'),
+                  DropdownButton(
+                    value: statusOfTheUser,
+                    items: statusValue.map(statusMenuItem).toList(),
+                    onChanged: (value) =>
+                        setState(() => this.statusOfTheUser = value as String),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  RaisedButton(
+                    onPressed: () async {
+                      List<double> feature = <double>[];
+                      await trainingService.createSet(
+                          exercise.text,
+                          widget.muscle,
+                          double.parse(weight.text),
+                          int.parse(setNumber.text),
+                          int.parse(
+                            widget.statusOfUser.toString(),
                           ),
-                        )),
-                    SizedBox(height: 10),
-                    Text(widget.muscle),
-                  ],
-                )
-              ],
+                          int.parse(widget.duration.toString()),
+                          widget.datas.toList(),
+                          widget.server,
+                          context,
+                          feature);
+                    },
+                    child: Text('Save'),
+                  )
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 250,
-              height: 200,
-              child: SfCartesianChart(series: <ChartSeries>[
-                // Renders line chart
-                FastLineSeries<double, int>(
-                    dataSource: widget.datas,
-                    xValueMapper: (datas, _) => i++,
-                    yValueMapper: (datas, _) => datas)
-              ]),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => TrainingOne(
+                                    server: widget.server,
+                                  )),
+                          (Route<dynamic> route) => false);
+                    },
+                    child: Text('Try Again'),
+                  )
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: exercise,
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                  labelText: 'Name of the exercise',
-                  prefixIcon: Icon(FontAwesomeIcons.dumbbell),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: weight,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                  labelText: 'Weight',
-                  prefixIcon: Icon(FontAwesomeIcons.weight),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: setNumber,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                  labelText: 'Set Number',
-                  prefixIcon: Icon(FontAwesomeIcons.listNumeric),
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Status of the user for the training:'),
-                DropdownButton(
-                  value: statusOfTheUser,
-                  items: statusValue.map(statusMenuItem).toList(),
-                  onChanged: (value) =>
-                      setState(() => this.statusOfTheUser = value as String),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                RaisedButton(
-                  onPressed: () async {
-                    await trainingService.createSet(
-                        exercise.text,
-                        widget.muscle,
-                        double.parse(weight.text),
-                        int.parse(setNumber.text),
-                        int.parse(
-                          widget.statusOfUser.toString(),
-                        ),
-                        int.parse(widget.duration.toString()),
-                        widget.datas.toList(),
-                        widget.server,
-                        context);
-                  },
-                  child: Text('Save'),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => TrainingOne(
-                                  server: widget.server,
-                                )),
-                        (Route<dynamic> route) => false);
-                  },
-                  child: Text('Try Again'),
-                )
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -18,7 +19,8 @@ class TrainingService {
       int duration,
       List<double> datas,
       BluetoothDevice server,
-      BuildContext context) async {
+      BuildContext context,
+      List<double> features) async {
     try {
       DateTime date = DateTime.now().toLocal();
       var nameOfTrainings = '${date.day}-${date.month}-${date.year}';
@@ -65,18 +67,50 @@ class TrainingService {
         'statusOfUser': statusOfUser,
         'duration': duration,
         'datas': datas.toList(),
-      }).then((value) => Navigator.of(context)
-              .pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (context) => HomePage(
-                            server: server,
-                          )),
-                  (Route<dynamic> route) => false)
-              .onError((error, stackTrace) => dialog.showErrorDialog(
-                  'An error occured. Please try again!', context)));
+        'features': features.toList(),
+      }).then((value) => getDatas(nameOfTrainings, muscleName, exerciseName,
+                      'SetNumber-' + setNumber.toString())
+                  .then((value) {
+                print(value.get('datas').toList());
+                final datas = value.get('datas').toList();
+                writeFeatures(datas).then((value) {
+                  updateSetWithFeatures(exerciseName, muscleName, weight,
+                          setNumber, value.toList())
+                      .then((value) => Navigator.of(context)
+                          .pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                        server: server,
+                                      )),
+                              (Route<dynamic> route) => false)
+                          .onError((error, stackTrace) =>
+                              dialog.showErrorDialog(
+                                  'An error occured. Please try again!',
+                                  context)));
+                });
+              }));
     } catch (e) {
       dialog.showErrorDialog('An error occured. Please try again!', context);
     }
+  }
+
+  Future updateSetWithFeatures(String exerciseName, String muscleName,
+      double weight, int setNumber, List features) async {
+    DateTime date = DateTime.now().toLocal();
+    var nameOfTrainings = '${date.day}-${date.month}-${date.year}';
+    await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .doc(exerciseName)
+        .collection('Sets')
+        .doc('SetNumber-' + setNumber.toString())
+        .update({'features': features}).onError(
+            (error, stackTrace) => print('Hata'));
   }
 
   Future<QuerySnapshot> getTraining() async {
@@ -149,5 +183,16 @@ class TrainingService {
         .get();
 
     return datesRef;
+  }
+
+  Future writeFeatures(List data) async {
+    List list = <double>[];
+    HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('writeFeatures');
+    final resp = await callable.call(<String, List>{
+      'list': data.toList(),
+    });
+    print(resp.data);
+    return resp.data;
   }
 }
