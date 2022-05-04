@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobileapp/models/body_measurements.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/services/user_firebase.dart';
@@ -12,6 +11,8 @@ class BodyMeasurementsWidget extends StatelessWidget {
   UserService userService = UserService();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return FutureBuilder<QuerySnapshot>(
         future: userService.getBodydata(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -24,28 +25,49 @@ class BodyMeasurementsWidget extends StatelessWidget {
           }
           final dataList = snapshot.data!.docs.toList();
           return Card(
+            shape: RoundedRectangleBorder(
+                side: new BorderSide(color: Colors.orange, width: 1.0),
+                borderRadius: BorderRadius.circular(10.0)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Body Measurements',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Body Measurements",
+                      textScaleFactor: 1.4,
+                      style: TextStyle(fontFamily: 'IndieFlower'),
+                    ),
+                  ],
                 ),
                 Divider(
-                  color: Color.fromARGB(255, 131, 25, 25),
+                  height: 5,
+                  thickness: 1,
+                  indent: 5,
+                  endIndent: 0,
+                  color: Colors.orange,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     Icon(
                       Icons.height,
                       size: 35,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Height:'),
-                        Text(dataList[0]['height'].toString()),
+                        Text(
+                          'Height:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['height'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -53,16 +75,23 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
-                      FontAwesomeIcons.weight,
+                      FontAwesomeIcons.weightScale,
                       size: 35,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Weight:'),
-                        Text(dataList[0]['weight'].toString()),
+                        Text(
+                          'Weight:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['weight'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -70,33 +99,23 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    FaIcon(
-                      FontAwesomeIcons.dumbbell,
-                      size: 35,
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Arm:'),
-                        Text(dataList[0]['arm'].toString()),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
                       FontAwesomeIcons.dumbbell,
-                      size: 35,
+                      size: 30,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Chest:'),
-                        Text(dataList[0]['chest'].toString()),
+                        Text(
+                          'Arm:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['arm'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -104,16 +123,23 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
                       FontAwesomeIcons.dumbbell,
-                      size: 35,
+                      size: 30,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Shoulder:'),
-                        Text(dataList[0]['shoulder'].toString()),
+                        Text(
+                          'Chest:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['chest'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -121,16 +147,23 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
                       FontAwesomeIcons.dumbbell,
-                      size: 35,
+                      size: 30,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Waist:'),
-                        Text(dataList[0]['waist'].toString()),
+                        Text(
+                          'Shoulder:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['shoulder'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -138,16 +171,23 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
                       FontAwesomeIcons.dumbbell,
-                      size: 35,
+                      size: 30,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Hipst:'),
-                        Text(dataList[0]['hipst'].toString()),
+                        Text(
+                          'Waist:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['waist'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
@@ -155,44 +195,88 @@ class BodyMeasurementsWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: width * 0.02),
                     FaIcon(
                       FontAwesomeIcons.dumbbell,
-                      size: 35,
+                      size: 30,
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: width * 0.05),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hipst:',
+                          textScaleFactor: 1.2,
+                        ),
+                        Text(
+                          dataList[0]['hipst'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: width * 0.02),
+                    FaIcon(
+                      FontAwesomeIcons.dumbbell,
+                      size: 30,
+                    ),
+                    SizedBox(width: width * 0.05),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Thigh:'),
-                        Text(dataList[0]['thigh'].toString()),
+                        Text(
+                          dataList[0]['thigh'].toString(),
+                          textScaleFactor: 1.2,
+                        ),
                       ],
                     )
                   ],
                 ),
+                SizedBox(height: height * 0.03),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    RaisedButton(
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(
+                        width * 0.3,
+                        height * 0.06,
+                      )),
                       onPressed: () {
                         Navigator.of(context).pushNamed(BodyGraph.routeName);
                       },
                       child: Text(
                         'See on the graph',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: width * 0.04),
                       ),
                     ),
-                    RaisedButton(
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(
+                        width * 0.3,
+                        height * 0.06,
+                      )),
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(BodyMeasurementsHistory.routeName);
                       },
                       child: Text(
-                        'See All History',
-                        style: TextStyle(color: Colors.white),
+                        'See all history',
+                        style: TextStyle(
+                            color: Colors.white, fontSize: width * 0.04),
                       ),
                     ),
                   ],
-                )
+                ),
+                SizedBox(
+                  height: height * 0.015,
+                ),
               ],
             ),
           );

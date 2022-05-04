@@ -16,8 +16,11 @@ class BodyMeasurements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthDevice = MediaQuery.of(context).size.width;
+    double heightDevice = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Body Measurements'),
       ),
       body: Container(
@@ -27,10 +30,10 @@ class BodyMeasurements extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: heightDevice * 0.03,
               ),
               Padding(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -39,14 +42,14 @@ class BodyMeasurements extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
-                      'before starting',
+                      'before starting!',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: height,
                   keyboardType: TextInputType.number,
@@ -58,19 +61,19 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: weight,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       labelText: 'Weight(kg)',
-                      prefixIcon: Icon(FontAwesomeIcons.weight),
+                      prefixIcon: Icon(FontAwesomeIcons.weightScale),
                       border: OutlineInputBorder()),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: arm,
                   keyboardType: TextInputType.number,
@@ -82,7 +85,7 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: chest,
                   keyboardType: TextInputType.number,
@@ -94,7 +97,7 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: shoulder,
                   keyboardType: TextInputType.number,
@@ -106,7 +109,7 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: waist,
                   keyboardType: TextInputType.number,
@@ -118,7 +121,7 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: hipst,
                   keyboardType: TextInputType.number,
@@ -130,7 +133,7 @@ class BodyMeasurements extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: thigh,
                   keyboardType: TextInputType.number,
@@ -143,7 +146,12 @@ class BodyMeasurements extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                    widthDevice * 0.7,
+                    heightDevice * 0.05,
+                  )),
                   onPressed: () {
                     userService.updateBody(
                       double.parse(height.text),
@@ -159,7 +167,8 @@ class BodyMeasurements extends StatelessWidget {
                   },
                   child: Text(
                     'Continue',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontSize: widthDevice * 0.04),
                   ),
                 ),
               ),

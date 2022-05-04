@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/commons/dialog.dart';
 import 'package:mobileapp/screens/Auth/reset_password.dart';
 import 'package:mobileapp/screens/home_page.dart';
-import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/Auth/register.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
 import 'package:mobileapp/services/auth_firebase.dart';
@@ -14,90 +14,66 @@ class SignInScreen extends StatelessWidget {
 
   TextEditingController emailText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
+  MyDialog dialog = MyDialog();
   var message = '';
 
   @override
   Widget build(BuildContext context) {
-    void showErrorDialog(String message) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text('An Error Occurred!'),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Okay'),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            )
-          ],
-        ),
-      );
-    }
-
     void signIn() async {
       dynamic result = await auth.signIn(emailText.text, passwordText.text);
       FirebaseAuth _auth = FirebaseAuth.instance;
+      if (emailText.text != '' && passwordText.text != '') {
+        if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(_auth.currentUser!.uid)
+              .get()
+              .then((DocumentSnapshot documentSnapshot) {
+            if (documentSnapshot.exists) {
+              var name = documentSnapshot.get('name');
 
-      if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
-        FirebaseFirestore.instance
-            .collection('User')
-            .doc(_auth.currentUser!.uid)
-            .get()
-            .then((DocumentSnapshot documentSnapshot) {
-          if (documentSnapshot.exists) {
-            var name = documentSnapshot.get('name');
-            print(name);
-            if (name == null) {
-              Navigator.of(context)
-                  .pushReplacementNamed(UserInfoScreen.routeName);
-            } else {
-              Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+              if (name == null) {
+                Navigator.of(context)
+                    .pushReplacementNamed(UserInfoScreen.routeName);
+              } else {
+                Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+              }
             }
-          }
-        });
+          });
+        } else {
+          message = result.toString();
+          dialog.showErrorDialog(message, context);
+        }
       } else {
-        message = result.toString();
-        showErrorDialog(message);
+        message = 'Email or password field is empty!';
+        dialog.showErrorDialog(message, context);
       }
     }
 
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Container(
+        color: Colors.white,
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
-                height: 100,
+                height: height * 0.08,
               ),
-              CircleAvatar(
-                radius: 48,
-                backgroundColor: Colors.white,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(48),
-                    child:
-                        Image.asset('lib/assets/images/bee-strong-avatar.png')),
+              Image.asset(
+                'lib/assets/images/bee-strong-avatar.png',
+                width: width * 0.5,
+                height: height * 0.3,
               ),
               SizedBox(
-                height: 35,
-              ),
-              Center(
-                child: Text(
-                  'Bee Strong!',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 35,
+                height: height * 0.02,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: emailText,
                   keyboardType: TextInputType.emailAddress,
@@ -108,9 +84,11 @@ class SignInScreen extends StatelessWidget {
                       border: OutlineInputBorder()),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(
+                height: height * 0.01,
+              ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: passwordText,
                   obscureText: true,
@@ -123,7 +101,7 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding: EdgeInsets.only(top: height * 0.01),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -137,17 +115,23 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: RaisedButton(
+                padding: EdgeInsets.only(top: height * 0.01),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                    width * 0.9,
+                    height * 0.06,
+                  )),
                   onPressed: signIn,
                   child: Text(
                     'Sign In',
-                    style: TextStyle(color: Colors.white),
+                    style:
+                        TextStyle(color: Colors.white, fontSize: width * 0.06),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 12.0),
+                padding: EdgeInsets.only(top: height * 0.01),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

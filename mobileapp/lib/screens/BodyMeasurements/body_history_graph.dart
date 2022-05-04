@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/models/body_measurements.dart';
 import 'package:mobileapp/services/user_firebase.dart';
-import 'package:mobileapp/widgets/drawer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class BodyGraph extends StatefulWidget {
   static const routeName = '/bodyGraph';
@@ -17,6 +15,8 @@ class BodyGraph extends StatefulWidget {
 class _BodyGraphState extends State<BodyGraph> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     FirebaseAuth _auth = FirebaseAuth.instance;
     UserService userService = UserService();
     return Scaffold(
@@ -45,8 +45,7 @@ class _BodyGraphState extends State<BodyGraph> {
               SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
                   // Chart title
-                  title:
-                      ChartTitle(text: 'Body Measurements by Monthly Update'),
+                  title: ChartTitle(text: 'Body Measurements History'),
                   // Enable legend
                   legend: Legend(isVisible: true),
                   // Enable tooltip

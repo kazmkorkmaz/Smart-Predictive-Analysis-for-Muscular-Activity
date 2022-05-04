@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: Text('MuscleNET Home'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -35,7 +35,9 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingAction(),
-      drawer: MainDrawer(),
+      drawer: MainDrawer(
+        server: server,
+      ),
     );
   }
 }

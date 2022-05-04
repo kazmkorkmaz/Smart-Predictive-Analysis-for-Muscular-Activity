@@ -17,6 +17,8 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
   MyDialog dialog = MyDialog();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('Body Measurements History'),
@@ -60,28 +62,50 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                       );
                     },
                     body: Card(
+                      shape: RoundedRectangleBorder(
+                          side:
+                              new BorderSide(color: Colors.orange, width: 1.0),
+                          borderRadius: BorderRadius.circular(10.0)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Body Measurements',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Body Measurements",
+                                textScaleFactor: 1.4,
+                                style: TextStyle(fontFamily: 'IndieFlower'),
+                              ),
+                            ],
                           ),
                           Divider(
-                            color: Color.fromARGB(255, 131, 25, 25),
+                            height: 5,
+                            thickness: 1,
+                            indent: 5,
+                            endIndent: 0,
+                            color: Colors.orange,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               Icon(
                                 Icons.height,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Height:'),
-                                  Text(item['height'].toString()),
+                                  Text(
+                                    'Height:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['height'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -89,16 +113,20 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
-                                FontAwesomeIcons.weight,
-                                size: 35,
+                                FontAwesomeIcons.weightScale,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Weight:'),
-                                  Text(item['weight'].toString()),
+                                  Text(
+                                    item['weight'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -106,16 +134,23 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Arm:'),
-                                  Text(item['arm'].toString()),
+                                  Text(
+                                    'Arm:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['arm'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -123,16 +158,23 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Chest:'),
-                                  Text(item['chest'].toString()),
+                                  Text(
+                                    'Chest:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['chest'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -140,16 +182,23 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Shoulder:'),
-                                  Text(item['shoulder'].toString()),
+                                  Text(
+                                    'Shoulder:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['shoulder'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -157,16 +206,23 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Waist:'),
-                                  Text(item['waist'].toString()),
+                                  Text(
+                                    'Waist:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['waist'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -174,16 +230,23 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Hipst:'),
-                                  Text(item['hipst'].toString()),
+                                  Text(
+                                    'Hipst:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['hipst'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
@@ -191,19 +254,29 @@ class _BodyMeasurementsHistoryState extends State<BodyMeasurementsHistory> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(width: width * 0.02),
                               FaIcon(
                                 FontAwesomeIcons.dumbbell,
-                                size: 35,
+                                size: 30,
                               ),
-                              SizedBox(width: 20),
+                              SizedBox(width: width * 0.05),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Thigh:'),
-                                  Text(item['thigh'].toString()),
+                                  Text(
+                                    'Thigh:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    item['thigh'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
                                 ],
                               )
                             ],
+                          ),
+                          SizedBox(
+                            height: height * 0.015,
                           ),
                         ],
                       ),

@@ -21,32 +21,6 @@ class _UpdateBodyMeasurementsState extends State<UpdateBodyMeasurements> {
   TextEditingController hipst = TextEditingController();
   TextEditingController thigh = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   // userService.getBodydata().then((data) {
-  //   //   height.text = data.height.toString();
-  //   //   weight.text = data.weight.toString();
-  //   //   arm.text = data.arm.toString();
-  //   //   chest.text = data.chest.toString();
-  //   //   shoulder.text = data.shoulder.toString();
-  //   //   waist.text = data.waist.toString();
-  //   //   hipst.text = data.hipst.toString();
-  //   //   thigh.text = data.thigh.toString(); });
-  //   userService.getBodydata().then((data) {
-  //     data.docs.forEach((element) {
-  //       height.text = element['height'];
-  //       weight.text = element['weight'];
-  //       arm.text = element['arm'];
-  //       chest.text = element['chest'];
-  //       shoulder.text = element['shoulder'];
-  //       waist.text = element['waist'];
-  //       hipst.text = element['hipst'];
-  //       thigh.text = element['thigh'];
-  //     });
-  //   });
-
-  //   super.initState();
-  // }
   @override
   void initState() {
     userService.getBodydata().then((value) {
@@ -65,6 +39,8 @@ class _UpdateBodyMeasurementsState extends State<UpdateBodyMeasurements> {
 
   @override
   Widget build(BuildContext context) {
+    double widthDevice = MediaQuery.of(context).size.width;
+    double heightDevice = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('Body Measurements'),
@@ -176,7 +152,12 @@ class _UpdateBodyMeasurementsState extends State<UpdateBodyMeasurements> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                    widthDevice * 0.6,
+                    heightDevice * 0.06,
+                  )),
                   onPressed: () {
                     userService.updateBody(
                       double.parse(height.text),
@@ -192,7 +173,8 @@ class _UpdateBodyMeasurementsState extends State<UpdateBodyMeasurements> {
                   },
                   child: Text(
                     'Update',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white, fontSize: widthDevice * 0.05),
                   ),
                 ),
               ),

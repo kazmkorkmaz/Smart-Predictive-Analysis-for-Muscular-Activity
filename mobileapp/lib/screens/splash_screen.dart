@@ -2,10 +2,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/home_page.dart';
-import 'package:mobileapp/screens/Training/training_one.dart';
-import 'package:mobileapp/screens/Auth/login.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
+import 'package:mobileapp/screens/home_page.dart';
+
+import 'package:mobileapp/screens/Auth/login.dart';
+import 'package:mobileapp/services/user_firebase.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splashScreen';
@@ -14,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  UserService userService = UserService();
   Timer? _timer;
   @override
   void initState() {
@@ -37,31 +39,19 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 100,
-                backgroundColor: Colors.white,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(1),
-                    child:
-                        Image.asset('lib/assets/images/bee-strong-avatar.png')),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Bee Strong!',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 125,
-              ),
-              CircularProgressIndicator(),
-            ],
-          ),
+        color: Colors.white,
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'lib/assets/images/bee-strong-avatar.png',
+              width: MediaQuery.of(context).size.width * 1,
+              height: MediaQuery.of(context).size.height * 0.8,
+            ),
+            CircularProgressIndicator(),
+          ],
         ),
       ),
     );

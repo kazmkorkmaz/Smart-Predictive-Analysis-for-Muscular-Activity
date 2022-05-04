@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 
 class HomeProfilCart extends StatelessWidget {
@@ -20,9 +21,9 @@ class HomeProfilCart extends StatelessWidget {
             CircleAvatar(
               radius: 64,
               backgroundColor: Colors.white,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset('lib/assets/images/bee-strong-avatar.png'),
+              child: Icon(
+                FontAwesomeIcons.addressCard,
+                size: 80,
               ),
             ),
             SizedBox(height: 25),

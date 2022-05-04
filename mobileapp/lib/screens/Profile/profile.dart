@@ -17,41 +17,47 @@ class ProfilePage extends StatelessWidget {
       body: FutureBuilder(
           future: userService.getUserData(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+            double width = MediaQuery.of(context).size.width;
+            double height = MediaQuery.of(context).size.height;
             return snapshot.connectionState != ConnectionState.done
                 ? Center(child: CircularProgressIndicator())
                 : Container(
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(4.0),
                         child: Container(
                           width: double.infinity,
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 40,
+                                height: height * 0.02,
                               ),
-                              CircleAvatar(
-                                radius: 64,
-                                backgroundColor: Colors.white,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Image.asset(
-                                      'lib/assets/images/bee-strong-avatar.png'),
-                                ),
+                              Image.asset(
+                                'lib/assets/images/bee-strong-avatar.png',
+                                width: width * 0.8,
+                                height: height * 0.2,
                               ),
                               SizedBox(
-                                height: 15,
+                                height: height * 0.02,
                               ),
                               Center(
-                                child: Text(snapshot.data.name
-                                        .toString()
-                                        .toUpperCase() +
-                                    ' ' +
-                                    snapshot.data.surname
-                                        .toString()
-                                        .toUpperCase()),
+                                child: Text(
+                                  snapshot.data.name.toString().toUpperCase() +
+                                      ' ' +
+                                      snapshot.data.surname
+                                          .toString()
+                                          .toUpperCase(),
+                                  textScaleFactor: 1.8,
+                                  style: TextStyle(
+                                      fontFamily: 'LuckiestGuy',
+                                      color: Colors.black),
+                                ),
                               ),
                               Card(
+                                shape: RoundedRectangleBorder(
+                                    side: new BorderSide(
+                                        color: Colors.orange, width: 1.0),
+                                    borderRadius: BorderRadius.circular(10.0)),
                                 child: Padding(
                                   padding: const EdgeInsets.all(15),
                                   child: Row(
@@ -61,33 +67,34 @@ class ProfilePage extends StatelessWidget {
                                       Container(
                                         child: Column(
                                           children: [
-                                            Text('Age'),
+                                            Text(
+                                              'Age',
+                                              textScaleFactor: 1.2,
+                                            ),
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(snapshot.data.age),
+                                            Text(
+                                              snapshot.data.age,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         ),
                                       ),
                                       Container(
                                         child: Column(
                                           children: [
-                                            Text('Birthday'),
+                                            Text(
+                                              'Birthday',
+                                              textScaleFactor: 1.2,
+                                            ),
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            Text(snapshot.data.dateofBirth),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Text('Trainings'),
-                                            SizedBox(
-                                              height: 4,
+                                            Text(
+                                              snapshot.data.dateofBirth,
+                                              textScaleFactor: 1.2,
                                             ),
-                                            Text("0")
                                           ],
                                         ),
                                       ),
@@ -96,30 +103,57 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                               Card(
+                                shape: RoundedRectangleBorder(
+                                    side: new BorderSide(
+                                        color: Colors.orange, width: 1.0),
+                                    borderRadius: BorderRadius.circular(10.0)),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "User Informations",
+                                    SizedBox(
+                                      height: height * 0.02,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "User Informations",
+                                          textScaleFactor: 1.4,
+                                          style: TextStyle(
+                                              fontFamily: 'IndieFlower'),
+                                        ),
+                                      ],
                                     ),
                                     Divider(
-                                      color: Color.fromARGB(255, 131, 25, 25),
+                                      height: 5,
+                                      thickness: 1,
+                                      indent: 5,
+                                      endIndent: 0,
+                                      color: Colors.orange,
                                     ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+                                        SizedBox(width: width * 0.02),
                                         Icon(
                                           Icons.email,
                                           size: 35,
                                         ),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: width * 0.05),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('E-mail:'),
-                                            Text(snapshot.data.email),
+                                            Text(
+                                              'E-mail:',
+                                              textScaleFactor: 1.2,
+                                            ),
+                                            Text(
+                                              snapshot.data.email,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         )
                                       ],
@@ -128,17 +162,24 @@ class ProfilePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+                                        SizedBox(width: width * 0.02),
                                         Icon(
                                           Icons.emoji_people,
                                           size: 35,
                                         ),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: width * 0.05),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('Gender:'),
-                                            Text(snapshot.data.gender),
+                                            Text(
+                                              'Gender:',
+                                              textScaleFactor: 1.2,
+                                            ),
+                                            Text(
+                                              snapshot.data.gender,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         )
                                       ],
@@ -147,17 +188,24 @@ class ProfilePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+                                        SizedBox(width: width * 0.02),
                                         Icon(
                                           Icons.no_drinks,
                                           size: 35,
                                         ),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: width * 0.05),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('Alcohol:'),
-                                            Text(snapshot.data.alcohol),
+                                            Text(
+                                              'Alcohol:',
+                                              textScaleFactor: 1.2,
+                                            ),
+                                            Text(
+                                              snapshot.data.alcohol,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         )
                                       ],
@@ -166,17 +214,24 @@ class ProfilePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+                                        SizedBox(width: width * 0.02),
                                         Icon(
                                           Icons.smoke_free,
                                           size: 35,
                                         ),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: width * 0.05),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('Tobocco:'),
-                                            Text(snapshot.data.tobocco),
+                                            Text(
+                                              'Tobocco:',
+                                              textScaleFactor: 1.2,
+                                            ),
+                                            Text(
+                                              snapshot.data.tobocco,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         )
                                       ],
@@ -185,33 +240,53 @@ class ProfilePage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
+                                        SizedBox(width: width * 0.02),
                                         Icon(
                                           Icons.date_range,
                                           size: 35,
                                         ),
-                                        SizedBox(width: 20),
+                                        SizedBox(width: width * 0.05),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text('Register Date:'),
-                                            Text(snapshot.data.registerDate),
+                                            Text(
+                                              'Register Date:',
+                                              textScaleFactor: 1.2,
+                                            ),
+                                            Text(
+                                              snapshot.data.registerDate,
+                                              textScaleFactor: 1.2,
+                                            ),
                                           ],
                                         )
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: height * 0.015,
                                     ),
                                   ],
                                 ),
                               ),
                               BodyMeasurementsWidget(),
-                              RaisedButton(
+                              SizedBox(
+                                height: height * 0.015,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(
+                                  width * 0.3,
+                                  height * 0.06,
+                                )),
                                 onPressed: () {
                                   Navigator.of(context).pushNamed(
                                       UpdateBodyMeasurements.routeName);
                                 },
                                 child: Text(
                                   'Update Body Measurements',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: width * 0.04),
                                 ),
                               ),
                             ],

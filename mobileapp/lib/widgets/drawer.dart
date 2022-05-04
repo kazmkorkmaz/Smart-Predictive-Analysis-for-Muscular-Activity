@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/Auth/login.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:mobileapp/commons/dialog.dart';
+import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
@@ -8,8 +10,13 @@ import 'package:mobileapp/services/auth_firebase.dart';
 
 class MainDrawer extends StatelessWidget {
   AuthenticationService auth = AuthenticationService();
+  MyDialog dialog = MyDialog();
+  final BluetoothDevice? server;
+
+  MainDrawer({this.server});
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -22,25 +29,13 @@ class MainDrawer extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 48,
-                      backgroundColor: Colors.white,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(48),
-                          child: Image.asset(
-                              'lib/assets/images/bee-strong-avatar.png')),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Bee Strong!'),
-                      ],
-                    ),
+                    Text(
+                      'MuscleNET',
+                      style: TextStyle(
+                          fontFamily: 'LuckiestGuy', fontSize: width * 0.1),
+                    )
                   ],
                 ),
               )),
@@ -66,14 +61,26 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.fitness_center),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pushNamed(TrainingOne.routeName);
+              if (server != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return TrainingOne(server: server as BluetoothDevice);
+                    },
+                  ),
+                );
+              } else {
+                dialog.showErrorDialog(
+                    'Please connect device before training!', context);
+              }
             },
           ),
           ListTile(
-            title: const Text('Settings'),
-            leading: Icon(Icons.settings),
+            title: const Text('Bluetooth Settings'),
+            leading: Icon(Icons.settings_bluetooth),
             onTap: () {
               Navigator.pop(context);
+              Navigator.of(context).pushNamed(MainPage.routeName);
             },
           ),
           ListTile(

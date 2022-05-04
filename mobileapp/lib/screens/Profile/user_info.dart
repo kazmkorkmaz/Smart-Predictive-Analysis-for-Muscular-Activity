@@ -37,6 +37,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -49,7 +51,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: height * 0.03,
               ),
               Padding(
                 padding: const EdgeInsets.all(12),
@@ -57,21 +59,21 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Please enter these personal information',
+                      'Please enter these personal informations',
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
-                      'before starting',
+                      'before starting!',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: height * 0.02,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: name,
                   keyboardType: TextInputType.name,
@@ -83,7 +85,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: surName,
                   keyboardType: TextInputType.name,
@@ -95,7 +97,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: TextField(
                   controller: date,
                   keyboardType: TextInputType.datetime,
@@ -120,13 +122,13 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         dateF = pickedDate;
                       });
                     } else {
-                      print("Date is not selected");
+                      dialog.showErrorDialog('Date is not selected!', context);
                     }
                   },
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -141,7 +143,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -156,7 +158,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -172,14 +174,20 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                    width * 0.7,
+                    height * 0.05,
+                  )),
                   onPressed: () {
                     userService.updateUser(name.text, surName.text, gender!,
                         dateF!, alcohol!, tobocco!, context);
                   },
                   child: Text(
                     'Continue',
-                    style: TextStyle(color: Colors.white),
+                    style:
+                        TextStyle(color: Colors.white, fontSize: width * 0.04),
                   ),
                 ),
               ),
