@@ -60,11 +60,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   children: [
                     Text(
                       'Please enter these personal informations',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 15),
                     ),
                     Text(
                       'before starting!',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 15),
                     ),
                   ],
                 ),

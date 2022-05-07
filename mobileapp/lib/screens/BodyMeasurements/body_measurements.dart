@@ -39,11 +39,11 @@ class BodyMeasurements extends StatelessWidget {
                   children: [
                     Text(
                       'Please enter your body measurements',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 15),
                     ),
                     Text(
                       'before starting!',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 15),
                     ),
                   ],
                 ),

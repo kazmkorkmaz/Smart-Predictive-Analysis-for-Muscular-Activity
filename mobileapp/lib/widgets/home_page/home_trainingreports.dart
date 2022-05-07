@@ -2,6 +2,7 @@ import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/services/training_firebase.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 class HomeTrainingReports extends StatelessWidget {
   TrainingService trainingService = TrainingService();
@@ -10,44 +11,77 @@ class HomeTrainingReports extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        // FirebaseModelDownloader.instance
-        // .getModel(
-        //     "deneme",
-        //     FirebaseModelDownloadType.localModel,
-        //     FirebaseModelDownloadConditions(
-        //       iosAllowsCellularAccess: true,
-        //       iosAllowsBackgroundDownloading: false,
-        //       androidChargingRequired: false,
-        //       androidWifiRequired: false,
-        //       androidDeviceIdleRequired: false,
-        //     )
-        // ).then((value){
-        //   print(value.file.uri);
-        // } );
-        // final interpreter = await Interpreter.fromAsset('model.tflite');
+      onTap: () {
+        FirebaseModelDownloader.instance
+            .getModel(
+                "deneme2",
+                FirebaseModelDownloadType.localModel,
+                FirebaseModelDownloadConditions(
+                  iosAllowsCellularAccess: true,
+                  iosAllowsBackgroundDownloading: false,
+                  androidChargingRequired: false,
+                  androidWifiRequired: false,
+                  androidDeviceIdleRequired: false,
+                ))
+            .then((customModel) {
+          final localModelPath = customModel.file;
+
+          final interpreter = Interpreter.fromFile(localModelPath);
+          print(interpreter.getInputTensors());
+          print(interpreter.getOutputTensors());
+          var input = [
+            [
+              1.28286,
+              0.019973,
+              0.00056914,
+              0.0018633,
+              1.28308,
+              0.358558,
+              809.484,
+              1.17388,
+              0.390476,
+              1.11416,
+              0.00239583,
+              0.510301,
+              0.962426,
+              26.108,
+              0.0,
+              7.0
+            ]
+          ];
+          var output = List.filled(1 * 3, 0).reshape([1, 3]);
+
+          interpreter.run(input, output);
+          print(output);
+        });
+        // final interpreter =
+        //     await Interpreter.fromAsset('SyntheticMuscleDNN_1.tflite');
+        // interpreter.allocateTensors();
+        // print(interpreter.getInputTensors());
+        // print(interpreter.getOutputTensors());
 
         // var input = [
         //   [
-        //     1.55735,
-        //     0.311792,
-        //     0.147286,
-        //     0.158908,
-        //     1.60384,
-        //     68.7825,
-        //     728.84,
-        //     74.21,
-        //     0.616702,
-        //     1.19717,
-        //     0.207741,
-        //     0.0213675,
-        //     1.17942,
-        //     28.3669,
-        //     0,
-        //     1
+        //     1.28286,
+        //     0.019973,
+        //     0.00056914,
+        //     0.0018633,
+        //     1.28308,
+        //     0.358558,
+        //     809.484,
+        //     1.17388,
+        //     0.390476,
+        //     1.11416,
+        //     0.00239583,
+        //     0.510301,
+        //     0.962426,
+        //     26.108,
+        //     0.0,
+        //     7.0
         //   ]
         // ];
-        // var output = [];
+        // var output = List.filled(1 * 3, 0).reshape([1, 3]);
+
         // interpreter.run(input, output);
         // print(output);
         // await trainingService
@@ -114,5 +148,3 @@ class HomeTrainingReports extends StatelessWidget {
     );
   }
 }
-
-class Documentsnapshot {}
