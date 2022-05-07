@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/services/training_firebase.dart';
-import 'package:mobileapp/widgets/Training/training-exercise-card.dart';
 import 'package:mobileapp/widgets/Training/training-sets-card.dart';
 
 class Trainings4 extends StatefulWidget {
@@ -20,7 +19,7 @@ class _Trainings4State extends State<Trainings4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trainings'),
+        title: Text('Select Set'),
       ),
       body: FutureBuilder<QuerySnapshot>(
           future: training.getSets(widget.date, widget.muscle, widget.exercise),

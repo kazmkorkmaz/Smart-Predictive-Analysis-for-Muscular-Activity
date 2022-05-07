@@ -1,13 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-import './BluetoothDeviceListEntry.dart';
+import 'BlueDeviceList.dart';
 
 class SelectBondedDevicePage extends StatefulWidget {
-  /// If true, on page start there is performed discovery upon the bonded devices.
-  /// Then, if they are not avaliable, they would be disabled from the selection.
   final bool checkAvailability;
 
   const SelectBondedDevicePage({this.checkAvailability = true});
@@ -34,7 +31,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
   List<_DeviceWithAvailability> devices =
       List<_DeviceWithAvailability>.empty(growable: true);
 
-  // Availability
   StreamSubscription<BluetoothDiscoveryResult>? _discoveryStreamSubscription;
   bool _isDiscovering = false;
 
@@ -50,7 +46,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
       _startDiscovery();
     }
 
-    // Setup a list of the bonded devices
     FlutterBluetoothSerial.instance
         .getBondedDevices()
         .then((List<BluetoothDevice> bondedDevices) {
@@ -101,7 +96,6 @@ class _SelectBondedDevicePage extends State<SelectBondedDevicePage> {
 
   @override
   void dispose() {
-    // Avoid memory leak (`setState` after dispose) and cancel discovery
     _discoveryStreamSubscription?.cancel();
 
     super.dispose();

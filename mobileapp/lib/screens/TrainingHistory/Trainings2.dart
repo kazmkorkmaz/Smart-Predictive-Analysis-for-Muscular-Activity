@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/services/training_firebase.dart';
-import 'package:mobileapp/widgets/Training/training-date-card.dart';
 import 'package:mobileapp/widgets/Training/training-muscle-card.dart';
 
 class Trainings2 extends StatefulWidget {
@@ -17,7 +16,7 @@ class _Trainings2State extends State<Trainings2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trainings'),
+        title: Text('Select Muscle Group'),
       ),
       body: FutureBuilder<QuerySnapshot>(
           future: training.getMusclesGroup(widget.date),

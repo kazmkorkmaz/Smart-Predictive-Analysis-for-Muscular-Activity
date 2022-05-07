@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
+import 'package:mobileapp/screens/BlueSerial/SettingsPage.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements.dart';
@@ -14,7 +14,6 @@ import 'package:mobileapp/screens/splash_screen.dart';
 import 'package:mobileapp/screens/BodyMeasurements/update_body_measurements.dart';
 import 'package:mobileapp/screens/Profile/user_info.dart';
 import 'package:mobileapp/screens/Training/training_two.dart';
-import 'package:mobileapp/widgets/checkBlueState.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Raleway',
+          fontFamily: 'Raleway',
           primarySwatch: Colors.orange,
           accentColor: Colors.orangeAccent,
           buttonTheme: ButtonThemeData(
@@ -53,7 +52,6 @@ class MyApp extends StatelessWidget {
         BodyMeasurements.routeName: (ctx) => BodyMeasurements(),
         UpdateBodyMeasurements.routeName: (ctx) => UpdateBodyMeasurements(),
         BodyMeasurementsHistory.routeName: (ctx) => BodyMeasurementsHistory(),
-        CheckBlueState.routeName: (ctx) => CheckBlueState(),
         BodyGraph.routeName: (ctx) => BodyGraph(),
         TrainingInfo.routeName: (ctx) => TrainingInfo(),
         MainPage.routeName: (ctx) => MainPage(),

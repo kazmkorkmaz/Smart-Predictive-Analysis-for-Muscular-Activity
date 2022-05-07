@@ -1,3 +1,0 @@
-class TrainingSet {
-  // final String
-}

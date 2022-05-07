@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/commons/dialog.dart';
-import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/TrainingHistory/Trainings.dart';
 
 class HomeTrainingHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyDialog dialog = MyDialog();
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(Trainings.routeName);
@@ -28,15 +28,15 @@ class HomeTrainingHistory extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 child: Icon(
                   Icons.history_edu,
-                  size: 125,
+                  size: height * 0.2,
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            SizedBox(height: height * 0.025),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(width: 15, height: 15),
+                SizedBox(width: width * 0.05, height: height * 0.05),
                 Text(
                   'Training History',
                   style: TextStyle(fontSize: 20),
@@ -50,18 +50,18 @@ class HomeTrainingHistory extends StatelessWidget {
               indent: 10,
               endIndent: 10,
             ),
-            SizedBox(height: 15),
+            SizedBox(height: height * 0.015),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 15, height: 15),
+                SizedBox(height: height * 0.025),
                 Text(
                   'History of your trainings',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: height * 0.02),
           ],
         ),
       ),

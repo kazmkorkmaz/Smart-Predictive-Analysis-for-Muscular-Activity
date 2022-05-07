@@ -12,8 +12,7 @@ class BluetoothDeviceListEntry extends ListTile {
           onTap: onTap,
           onLongPress: onLongPress,
           enabled: enabled,
-          leading:
-              Icon(Icons.devices), // @TODO . !BluetoothClass! class aware icon
+          leading: Icon(Icons.devices),
           title: Text(device.name ?? ""),
           subtitle: Text(device.address.toString()),
           trailing: Row(
@@ -67,7 +66,6 @@ class BluetoothDeviceListEntry extends ListTile {
           color: Color.lerp(
               Colors.deepOrangeAccent, Colors.redAccent, -(rssi + 75) / 10));
     else
-      /*code symmetry*/
       return TextStyle(color: Colors.redAccent);
   }
 }

@@ -41,14 +41,10 @@ class _BodyGraphState extends State<BodyGraph> {
                 .toList();
 
             return Column(children: [
-              //Initialize the chart widget
               SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
-                  // Chart title
                   title: ChartTitle(text: 'Body Measurements History'),
-                  // Enable legend
                   legend: Legend(isVisible: true),
-                  // Enable tooltip
                   tooltipBehavior: TooltipBehavior(enable: true),
                   series: <LineSeries<BodyMeasurementsInfo, String>>[
                     LineSeries<BodyMeasurementsInfo, String>(

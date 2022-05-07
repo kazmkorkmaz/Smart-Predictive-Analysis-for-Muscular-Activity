@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/commons/dialog.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/Auth/login.dart';
-
 import 'package:mobileapp/services/auth_firebase.dart';
 
 class RegisterScreen extends StatelessWidget {

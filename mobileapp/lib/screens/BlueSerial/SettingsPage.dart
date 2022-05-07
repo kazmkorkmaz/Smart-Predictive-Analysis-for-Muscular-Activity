@@ -1,13 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/screens/home_page.dart';
-import './DiscoveryPage.dart';
-import './SelectBondedDevicePage.dart';
-
-// import './helpers/LineChart.dart';
+import 'DiscoveryDevicePage.dart';
+import 'SelectDevicePage.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = '/MainPage';
@@ -30,7 +26,6 @@ class _MainPage extends State<MainPage> {
   void initState() {
     super.initState();
 
-    // Get current state
     FlutterBluetoothSerial.instance.state.then((state) {
       setState(() {
         _bluetoothState = state;
@@ -38,14 +33,12 @@ class _MainPage extends State<MainPage> {
     });
 
     Future.doWhile(() async {
-      // Wait if adapter not enabled
       if ((await FlutterBluetoothSerial.instance.isEnabled) ?? false) {
         return false;
       }
       await Future.delayed(Duration(milliseconds: 0xDD));
       return true;
     }).then((_) {
-      // Update the address field
       FlutterBluetoothSerial.instance.address.then((address) {
         setState(() {
           _address = address!;
@@ -59,14 +52,12 @@ class _MainPage extends State<MainPage> {
       });
     });
 
-    // Listen for futher state changes
     FlutterBluetoothSerial.instance
         .onStateChanged()
         .listen((BluetoothState state) {
       setState(() {
         _bluetoothState = state;
 
-        // Discoverable mode is disabled when Bluetooth gets disabled
         _discoverableTimeoutTimer = null;
         _discoverableTimeoutSecondsLeft = 0;
       });
@@ -96,9 +87,7 @@ class _MainPage extends State<MainPage> {
               title: const Text('Enable Bluetooth'),
               value: _bluetoothState.isEnabled,
               onChanged: (bool value) {
-                // Do the request and update with the true value then
                 future() async {
-                  // async lambda seems to not working
                   if (value)
                     await FlutterBluetoothSerial.instance.requestEnable();
                   else

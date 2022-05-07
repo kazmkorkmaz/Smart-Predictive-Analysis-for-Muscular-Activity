@@ -10,6 +10,8 @@ class HomeTrainingReports extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
         FirebaseModelDownloader.instance
@@ -108,15 +110,15 @@ class HomeTrainingReports extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 child: Icon(
                   FontAwesomeIcons.noteSticky,
-                  size: 125,
+                  size: height * 0.2,
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            SizedBox(height: height * 0.025),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(width: 15, height: 15),
+                SizedBox(width: width * 0.05, height: height * 0.05),
                 Text(
                   'Training Reports',
                   style: TextStyle(fontSize: 20),
@@ -130,18 +132,18 @@ class HomeTrainingReports extends StatelessWidget {
               indent: 10,
               endIndent: 10,
             ),
-            SizedBox(height: 15),
+            SizedBox(height: height * 0.015),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 15, height: 15),
+                SizedBox(height: height * 0.025),
                 Text(
                   'See the training reports...',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: height * 0.02),
           ],
         ),
       ),

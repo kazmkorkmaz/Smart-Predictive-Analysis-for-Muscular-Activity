@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/commons/dialog.dart';
-import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
+import 'package:mobileapp/screens/BlueSerial/SettingsPage.dart';
 import 'package:mobileapp/screens/Profile/profile.dart';
 import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';

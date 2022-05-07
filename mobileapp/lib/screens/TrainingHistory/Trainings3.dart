@@ -17,7 +17,7 @@ class _Trainings3State extends State<Trainings3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trainings'),
+        title: Text('Select Exercise'),
       ),
       body: FutureBuilder<QuerySnapshot>(
           future: training.getExercise(widget.date, widget.muscle),

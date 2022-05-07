@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/BlueSerial/MainPage.dart';
-import 'package:mobileapp/widgets/checkBlueState.dart';
+import 'package:mobileapp/screens/BlueSerial/SettingsPage.dart';
 
 class FloatingAction extends StatelessWidget {
   @override
