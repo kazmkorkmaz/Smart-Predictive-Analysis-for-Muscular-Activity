@@ -54,7 +54,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "lib/assets/images/bee-strong-avatar.png"
+  image_path: "lib/assets/images/bee-strong-avatar-app-icon.png"
 
 
 dev_dependencies:
@@ -78,7 +78,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - lib/assets/images/bee-strong-avatar-app-icon.png
     - lib/assets/images/bee-strong-avatar.png
     - lib/assets/images/arm.png
     - lib/assets/images/back.png

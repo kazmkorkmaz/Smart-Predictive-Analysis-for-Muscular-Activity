@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/commons/dialog.dart';
 import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/services/functions_firebase.dart';
 
 class TrainingService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CloudFunctionsService cloudFunctionsService = CloudFunctionsService();
   MyDialog dialog = MyDialog();
   Future createSet(
       String exerciseName,
@@ -73,7 +74,7 @@ class TrainingService {
                   .then((value) {
                 print(value.get('datas').toList());
                 final datas = value.get('datas').toList();
-                writeFeatures(datas).then((value) {
+                cloudFunctionsService.writeFeatures(datas).then((value) {
                   updateSetWithFeatures(exerciseName, muscleName, weight,
                           setNumber, value.toList())
                       .then((value) => Navigator.of(context)
@@ -183,16 +184,5 @@ class TrainingService {
         .get();
 
     return datesRef;
-  }
-
-  Future writeFeatures(List data) async {
-    List list = <double>[];
-    HttpsCallable callable =
-        FirebaseFunctions.instance.httpsCallable('writeFeatures');
-    final resp = await callable.call(<String, List>{
-      'list': data.toList(),
-    });
-    print(resp.data);
-    return resp.data;
   }
 }
