@@ -17,29 +17,29 @@ class HomeTrainingReports extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () async {
-        var input = [
-          [
-            1.5068,
-            0.222061,
-            0.0729735,
-            0.144109,
-            1.53077,
-            34.8084,
-            720.25,
-            68.7399,
-            0.607966,
-            1.1867,
-            0.188154,
-            0.0,
-            1.13556,
-            48.7216,
-            1.0,
-            3.0,
-          ]
-        ];
+        // var input = [
+        //   [
+        //     2.5692,
+        //     0.898484,
+        //     1.13037,
+        //     0.224186,
+        //     2.78007,
+        //     534.666,
+        //     1217.8,
+        //     106.04,
+        //     0.682875,
+        //     1.45055,
+        //     0.305452,
+        //     0.464135,
+        //     1.91332,
+        //     42.9938,
+        //     1.0,
+        //     12.5
+        //   ]
+        // ];
 
-        var label = await ml_service.predict(input);
-        print(label);
+        // var label = await ml_service.predict(input);
+        // print(label);
 
         // FirebaseModelDownloader.instance
         //     .getModel(
@@ -92,13 +92,13 @@ class HomeTrainingReports extends StatelessWidget {
 
         // interpreter.run(input, output);
         // print(output);
-        await trainingService
-            .getDatas('25-4-2022', 'Biceps', 'asd', 'SetNumber-2')
-            .then((value) {
-          cloudFunctionsService.writeFeatures(value.get('datas').toList());
-        }).onError((error, stackTrace) {
-          print(error);
-        });
+        // await trainingService
+        //     .getDatas('25-4-2022', 'Biceps', 'asd', 'SetNumber-2')
+        //     .then((value) {
+        //   cloudFunctionsService.writeFeatures(value.get('datas').toList());
+        // }).onError((error, stackTrace) {
+        //   print(error);
+        // });
       },
       child: Card(
         shape: RoundedRectangleBorder(

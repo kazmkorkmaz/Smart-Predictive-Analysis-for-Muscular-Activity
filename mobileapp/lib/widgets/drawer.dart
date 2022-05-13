@@ -17,13 +17,14 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.orangeAccent,
+                color: Color.fromARGB(255, 255, 223, 154),
               ),
               child: Container(
                 height: double.infinity,
@@ -31,11 +32,11 @@ class MainDrawer extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'MuscleNET',
-                      style: TextStyle(
-                          fontFamily: 'LuckiestGuy', fontSize: width * 0.1),
-                    )
+                    Image.asset(
+                      'lib/assets/images/bee-strong-avatar.png',
+                      width: width * 0.8,
+                      height: height * 0.2,
+                    ),
                   ],
                 ),
               )),

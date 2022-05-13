@@ -6,14 +6,12 @@ exports.writeFeatures = functions.https.onCall(async (data, context) => {
   let sum = 0;
   let willisonAmplitude = 0;
   let myopulse = 0;
-  const thresholdForWillisonAmplitude = 0.1;
-  const thresholdForMyopulsePercentageRate = 2.5;
+  let thresholdForWillisonAmplitude = 0.1;
+  let thresholdForMyopulsePercentageRate = 2.5;
+  let diffBetweenSignals = 0;
   const sumForMMAV1 = [];
   for (let i = 0; i < datas.length; i++) {
     sum += datas[i];
-    if (datas[i] >= thresholdForMyopulsePercentageRate) {
-      myopulse += 1;
-    }
     let wN = 0;
     if (0.25 * datas.length <= i + 1 && i + 1 <= 0.75 * datas.length) {
       wN = 1;
@@ -24,6 +22,12 @@ exports.writeFeatures = functions.https.onCall(async (data, context) => {
     sumForMMAV1.push(value);
   }
   const mean = sum / datas.length;
+  thresholdForMyopulsePercentageRate=mean;
+  for (let i = 0; i < datas.length; i++) {
+    if (datas[i] >= thresholdForMyopulsePercentageRate) {
+      myopulse += 1;
+    }
+  }
   // Mean Absolute Deviation
   const differences = [];
   let difference = 0;
@@ -54,9 +58,6 @@ exports.writeFeatures = functions.https.onCall(async (data, context) => {
     if (differenceBetweenSignals < 0) {
       differenceBetweenSignals = -differenceBetweenSignals;
     }
-    if (differenceBetweenSignals >= thresholdForWillisonAmplitude) {
-      willisonAmplitude += 1;
-    }
     differencesBetweenSignals.push(differenceBetweenSignals);
   }
   let totalBetweenSignals = 0;
@@ -65,6 +66,14 @@ exports.writeFeatures = functions.https.onCall(async (data, context) => {
   }
   const averageAmplitudeChange =
     totalBetweenSignals / differencesBetweenSignals.length;
+  thresholdForWillisonAmplitude = averageAmplitudeChange;
+  for (let j = 1; j < datas.length; j++) {
+    diffBetweenSignals = datas[j] - datas[j - 1];
+    if (diffBetweenSignals >= thresholdForWillisonAmplitude ||
+      diffBetweenSignals <= -thresholdForWillisonAmplitude) {
+      willisonAmplitude += 1;
+    }
+  }
   // Root Mean Square
   let totalSquares = 0;
   for (let j = 0; j < datas.length; j++) {

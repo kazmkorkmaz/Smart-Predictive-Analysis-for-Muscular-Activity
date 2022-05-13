@@ -91,6 +91,8 @@ class _TrainingThreeState extends State<TrainingThree> {
   Widget build(BuildContext context) {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           title: Text('Training...'),
@@ -98,50 +100,64 @@ class _TrainingThreeState extends State<TrainingThree> {
         body: isConnected
             ? Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(isStart ? 'Keep continue...' : 'Lets Start..'),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black38)),
-                            child: Text(
-                              '${minutes}',
-                              style:
-                                  TextStyle(fontSize: 100, color: Colors.white),
-                            ),
+                    SizedBox(
+                      height: height * 0.10,
+                    ),
+                    Text(
+                      isStart ? 'Keep continue...' : 'Lets Start..',
+                      textScaleFactor: 2,
+                    ),
+                    SizedBox(
+                      height: height * 0.10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black38)),
+                          child: Text(
+                            '${minutes}',
+                            style:
+                                TextStyle(fontSize: 100, color: Colors.white),
                           ),
-                          SizedBox(
-                            width: 10,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black38)),
+                          child: Text(
+                            '${seconds}',
+                            style:
+                                TextStyle(fontSize: 100, color: Colors.white),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.black38)),
-                            child: Text(
-                              '${seconds}',
-                              style:
-                                  TextStyle(fontSize: 100, color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height * 0.08,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(
+                                width * 0.3,
+                                height * 0.06,
+                              ),
+                            ),
                             onPressed: () {
                               setState(() {
                                 _sendMessage('b');
@@ -161,9 +177,18 @@ class _TrainingThreeState extends State<TrainingThree> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: width * 0.015,
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: RaisedButton(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(
+                                width * 0.3,
+                                height * 0.06,
+                              ),
+                            ),
                             onPressed: () {
                               _sendMessage('c');
                               _sendMessage('c');

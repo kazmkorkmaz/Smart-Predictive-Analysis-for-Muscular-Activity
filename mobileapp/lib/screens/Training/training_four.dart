@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobileapp/screens/Training/training_five.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/services/training_firebase.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -52,6 +53,8 @@ class _TraningFinishState extends State<TraningFinish> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     int i = 0;
     return Scaffold(
       appBar: AppBar(
@@ -83,19 +86,27 @@ class _TraningFinishState extends State<TraningFinish> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: 250,
-                height: 200,
-                child: SfCartesianChart(series: <ChartSeries>[
-                  // Renders line chart
-                  FastLineSeries<double, int>(
-                      dataSource: widget.datas,
-                      xValueMapper: (datas, _) => i++,
-                      yValueMapper: (datas, _) => datas)
-                ]),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: width * 0.9,
+                    height: height * 0.4,
+                    child: SfCartesianChart(
+                        primaryYAxis: NumericAxis(maximum: 6, minimum: 0),
+                        primaryXAxis: NumericAxis(isVisible: false),
+                        series: <ChartSeries>[
+                          FastLineSeries<dynamic, int>(
+                              dataSource: widget.datas,
+                              xValueMapper: (datas, _) => i++,
+                              yValueMapper: (datas, _) =>
+                                  double.parse(datas.toString()))
+                        ]),
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -117,7 +128,7 @@ class _TraningFinishState extends State<TraningFinish> {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                     labelText: 'Weight',
-                    prefixIcon: Icon(FontAwesomeIcons.weight),
+                    prefixIcon: Icon(FontAwesomeIcons.weightScale),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -129,7 +140,7 @@ class _TraningFinishState extends State<TraningFinish> {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                     labelText: 'Set Number',
-                    prefixIcon: Icon(FontAwesomeIcons.listNumeric),
+                    prefixIcon: Icon(FontAwesomeIcons.listOl),
                     border: OutlineInputBorder()),
               ),
             ),
@@ -151,8 +162,15 @@ class _TraningFinishState extends State<TraningFinish> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                        width * 0.3,
+                        height * 0.06,
+                      ),
+                    ),
                     onPressed: () async {
                       List<double> feature = <double>[];
                       await trainingService.createSet(
@@ -170,15 +188,17 @@ class _TraningFinishState extends State<TraningFinish> {
                           feature);
                     },
                     child: Text('Save'),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  RaisedButton(
+                  ),
+                  SizedBox(
+                    width: width * 0.015,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                        width * 0.3,
+                        height * 0.06,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
@@ -188,8 +208,14 @@ class _TraningFinishState extends State<TraningFinish> {
                           (Route<dynamic> route) => false);
                     },
                     child: Text('Try Again'),
-                  )
+                  ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [],
               ),
             ),
           ],

@@ -23,7 +23,8 @@ class _TrainingInfoState extends State<TrainingInfo> {
   @override
   Widget build(BuildContext context) {
     final muscle = ModalRoute.of(context)!.settings.arguments as Muscle;
-
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('Muscle Group'),
@@ -108,7 +109,13 @@ class _TrainingInfoState extends State<TrainingInfo> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                          width * 0.5,
+                          height * 0.06,
+                        ),
+                      ),
                       onPressed: () {
                         if (muscle.server != '' &&
                             exercise.text != '' &&

@@ -3,13 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:mobileapp/commons/dialog.dart';
-import 'package:mobileapp/screens/home_page.dart';
+import 'package:mobileapp/screens/Training/training_five.dart';
 import 'package:mobileapp/services/functions_firebase.dart';
+import 'package:mobileapp/services/ml_firebase.dart';
+import 'package:mobileapp/services/user_firebase.dart';
 
 class TrainingService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CloudFunctionsService cloudFunctionsService = CloudFunctionsService();
+  UserService userService = UserService();
+  ML_Service ml_service = ML_Service();
   MyDialog dialog = MyDialog();
   Future createSet(
       String exerciseName,
@@ -72,19 +76,27 @@ class TrainingService {
       }).then((value) => getDatas(nameOfTrainings, muscleName, exerciseName,
                       'SetNumber-' + setNumber.toString())
                   .then((value) {
-                print(value.get('datas').toList());
                 final datas = value.get('datas').toList();
                 cloudFunctionsService.writeFeatures(datas).then((value) {
                   updateSetWithFeatures(exerciseName, muscleName, weight,
                           setNumber, value.toList())
-                      .then((value) => Navigator.of(context)
-                          .pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                        server: server,
-                                      )),
-                              (Route<dynamic> route) => false)
-                          .onError((error, stackTrace) =>
+                      .then((value) {
+                    updateWithMachineLearning(
+                        exerciseName, muscleName, weight, setNumber, value);
+                  }).then((value) => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return TrainingsFive(
+                                  server: server,
+                                  muscle: muscleName,
+                                  date: nameOfTrainings,
+                                  exercise: exerciseName,
+                                  setNumber:
+                                      'SetNumber-' + setNumber.toString(),
+                                );
+                              },
+                            ),
+                          ).onError((error, stackTrace) =>
                               dialog.showErrorDialog(
                                   'An error occured. Please try again!',
                                   context)));
@@ -99,6 +111,27 @@ class TrainingService {
       double weight, int setNumber, List features) async {
     DateTime date = DateTime.now().toLocal();
     var nameOfTrainings = '${date.day}-${date.month}-${date.year}';
+
+    var userBody;
+    var userGender;
+
+    var userData = await userService.getBodydata().then((value) {
+      userBody = value.docs.first.data();
+    });
+    var userInfoData = await userService.getUserData().then((value) {
+      userGender = value!.gender;
+    });
+
+    var genderNumber;
+    if (userGender == "male") {
+      genderNumber = 1;
+    } else {
+      genderNumber = 0;
+    }
+    features.add(userBody["fPower"]);
+    features.add(genderNumber);
+    features.add(weight);
+
     await firestore
         .collection('User')
         .doc(_auth.currentUser!.uid)
@@ -112,6 +145,43 @@ class TrainingService {
         .doc('SetNumber-' + setNumber.toString())
         .update({'features': features}).onError(
             (error, stackTrace) => print('Hata'));
+    return features;
+  }
+
+  Future updateWithMachineLearning(String exerciseName, String muscleName,
+      double weight, int setNumber, List features) async {
+    DateTime date = DateTime.now().toLocal();
+    var nameOfTrainings = '${date.day}-${date.month}-${date.year}';
+
+    List doubleFeatures = [];
+    features.forEach((element) {
+      doubleFeatures.add(double.parse(element.toString()));
+    });
+
+    int? injRisk;
+    var predictInj =
+        await ml_service.predictInjuryRisk([doubleFeatures]).then((value) {
+      injRisk = value.toInt();
+    });
+    int? impStatus;
+    var predictImpr =
+        await ml_service.predictImprovement([doubleFeatures]).then((value) {
+      impStatus = value.toInt();
+    });
+    await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .doc(exerciseName)
+        .collection('Sets')
+        .doc('SetNumber-' + setNumber.toString())
+        .update({"riskInjury": injRisk, "impStatus": impStatus}).onError(
+            (error, stackTrace) => print('Hata'));
+    return features;
   }
 
   Future<QuerySnapshot> getTraining() async {

@@ -5,10 +5,10 @@ import 'package:tflite_flutter/tflite_flutter.dart';
 class ML_Service {
   FirebaseModelDownloader downloader = FirebaseModelDownloader.instance;
 
-  Future<File> loadModel() async {
+  Future<File> loadModel(String modelName) async {
     try {
       final model = FirebaseModelDownloader.instance.getModel(
-          "deneme2",
+          modelName,
           FirebaseModelDownloadType.localModel,
           FirebaseModelDownloadConditions(
             iosAllowsCellularAccess: true,
@@ -25,8 +25,26 @@ class ML_Service {
     }
   }
 
-  Future predict(var input) async {
-    final modelFile = await loadModel();
+  Future<int> predictInjuryRisk(var input) async {
+    final modelFile = await loadModel("deneme4");
+    final interpreter = Interpreter.fromFile(modelFile);
+    var output = List.filled(1 * 2, 0).reshape([1, 2]);
+
+    interpreter.run(input, output);
+    double max = 0;
+    int index = 0;
+    for (var i = 0; i < output[0].length; i++) {
+      if (output[0][i] >= max) {
+        max = output[0][i];
+        index = i;
+      }
+    }
+
+    return index;
+  }
+
+  Future predictImprovement(var input) async {
+    final modelFile = await loadModel("deneme3");
     final interpreter = Interpreter.fromFile(modelFile);
     var output = List.filled(1 * 3, 0).reshape([1, 3]);
 
@@ -34,7 +52,6 @@ class ML_Service {
     double max = 0;
     int index = 0;
     for (var i = 0; i < output[0].length; i++) {
-      print(output[0][i]);
       if (output[0][i] >= max) {
         max = output[0][i];
         index = i;

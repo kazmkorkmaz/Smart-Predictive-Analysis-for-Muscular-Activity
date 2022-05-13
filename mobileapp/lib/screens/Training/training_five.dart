@@ -1,24 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobileapp/screens/Training/training_one.dart';
+import 'package:mobileapp/screens/home_page.dart';
 import 'package:mobileapp/services/training_firebase.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class Trainings5 extends StatefulWidget {
+class TrainingsFive extends StatefulWidget {
+  final BluetoothDevice server;
   final String muscle;
   final String date;
   final String exercise;
   final String setNumber;
-  Trainings5(
+  TrainingsFive(
       {required this.muscle,
       required this.date,
       required this.exercise,
-      required this.setNumber});
+      required this.setNumber,
+      required this.server});
   @override
-  _Trainings5State createState() => _Trainings5State();
+  _TrainingsFiveState createState() => _TrainingsFiveState();
 }
 
-class _Trainings5State extends State<Trainings5> {
+class _TrainingsFiveState extends State<TrainingsFive> {
   TrainingService training = TrainingService();
   @override
   Widget build(BuildContext context) {
@@ -139,11 +144,7 @@ class _Trainings5State extends State<Trainings5> {
                                     ),
                                   );
                                 },
-                                body: Column(
-                                  children: [
-                                    Text(injuryText),
-                                  ],
-                                ),
+                                body: Text(injuryText),
                               ),
                               ExpansionPanelRadio(
                                 canTapOnHeader: true,
@@ -284,6 +285,34 @@ class _Trainings5State extends State<Trainings5> {
                           ),
                           SizedBox(
                             height: height * 0.015,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: width * 0.015,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(
+                                      width * 0.3,
+                                      height * 0.06,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage(
+                                                  server: widget.server,
+                                                )),
+                                        (Route<dynamic> route) => false);
+                                  },
+                                  child: Text('Back Home'),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

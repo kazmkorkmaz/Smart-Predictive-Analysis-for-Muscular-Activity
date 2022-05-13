@@ -246,25 +246,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+5"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_blue:
-    dependency: "direct main"
-    description:
-      name: flutter_blue
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
   flutter_bluetooth_serial:
     dependency: "direct main"
     description:
@@ -401,13 +387,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   pub_semver:
     dependency: transitive
     description:
