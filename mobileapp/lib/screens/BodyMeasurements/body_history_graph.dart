@@ -15,9 +15,6 @@ class BodyGraph extends StatefulWidget {
 class _BodyGraphState extends State<BodyGraph> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    FirebaseAuth _auth = FirebaseAuth.instance;
     UserService userService = UserService();
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +41,8 @@ class _BodyGraphState extends State<BodyGraph> {
               SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
                   title: ChartTitle(text: 'Body Measurements History'),
-                  legend: Legend(isVisible: true),
+                  legend:
+                      Legend(isVisible: true, position: LegendPosition.bottom),
                   tooltipBehavior: TooltipBehavior(enable: true),
                   series: <LineSeries<BodyMeasurementsInfo, String>>[
                     LineSeries<BodyMeasurementsInfo, String>(

@@ -38,7 +38,7 @@ class HomeTrainingHistory extends StatelessWidget {
               children: [
                 SizedBox(width: width * 0.05, height: height * 0.05),
                 Text(
-                  'Training History',
+                  'Training History & Reports',
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -56,7 +56,7 @@ class HomeTrainingHistory extends StatelessWidget {
               children: [
                 SizedBox(height: height * 0.025),
                 Text(
-                  'History of your trainings',
+                  'History of your trainings and your reports',
                   style: TextStyle(fontSize: 15),
                 ),
               ],

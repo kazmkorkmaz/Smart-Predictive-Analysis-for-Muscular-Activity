@@ -110,7 +110,10 @@ class SignInScreen extends StatelessWidget {
                           Navigator.of(context)
                               .pushNamed(ResetPassword.routeName);
                         },
-                        child: const Text('Forgot Password ?')),
+                        child: const Text(
+                          'Forgot Password ?',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
                   ],
                 ),
               ),
@@ -125,8 +128,10 @@ class SignInScreen extends StatelessWidget {
                   onPressed: signIn,
                   child: Text(
                     'Sign In',
-                    style:
-                        TextStyle(color: Colors.white, fontSize: width * 0.06),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: width * 0.06,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -141,7 +146,10 @@ class SignInScreen extends StatelessWidget {
                           Navigator.of(context)
                               .pushReplacementNamed(RegisterScreen.routeName);
                         },
-                        child: const Text('Sign Up')),
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
                   ],
                 ),
               ),

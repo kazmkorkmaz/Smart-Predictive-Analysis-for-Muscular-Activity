@@ -114,6 +114,7 @@ class _TrainingsFiveState extends State<TrainingsFive> {
                                   width: width * 0.9,
                                   height: height * 0.4,
                                   child: SfCartesianChart(
+                                      title: ChartTitle(text: 'Training data'),
                                       primaryYAxis:
                                           NumericAxis(maximum: 6, minimum: 0),
                                       primaryXAxis:

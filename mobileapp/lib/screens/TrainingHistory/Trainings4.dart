@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobileapp/commons/dialog.dart';
+import 'package:mobileapp/screens/TrainingHistory/last_five_prediction.dart';
+import 'package:mobileapp/services/ml_firebase.dart';
 import 'package:mobileapp/services/training_firebase.dart';
 import 'package:mobileapp/widgets/Training/training-sets-card.dart';
 
@@ -15,6 +18,8 @@ class Trainings4 extends StatefulWidget {
 
 class _Trainings4State extends State<Trainings4> {
   TrainingService training = TrainingService();
+  ML_Service ml_service = ML_Service();
+  MyDialog dialog = MyDialog();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +50,61 @@ class _Trainings4State extends State<Trainings4> {
             final dataList = snapshot.data!.docs;
 
             return ListView.builder(
-              itemCount: dataList.length,
+              itemCount: dataList.length + 1,
               itemBuilder: (context, index) {
+                if (index == dataList.length) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (dataList.length >= 5) {
+                          training
+                              .getLastFiveSet(
+                                  widget.date, widget.muscle, widget.exercise)
+                              .then((value) {
+                            List input = [];
+                            value.docs.forEach((element) {
+                              print(element.get('setNumber'));
+                              input.add(element.get('features'));
+                            });
+
+                            List doubleFeatures = [];
+                            for (var i = input.length - 1; i >= 0; i--) {
+                              for (var j = 0; j < 16; j++) {
+                                doubleFeatures
+                                    .add(double.parse(input[i][j].toString()));
+                              }
+                            }
+
+                            ml_service
+                                .predictLastFive(doubleFeatures)
+                                .then((value) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return LastFivePredictionScreen(
+                                      index: value,
+                                      nameOfTrainings: widget.date,
+                                      muscleName: widget.muscle,
+                                      exerciseName: widget.exercise,
+                                    );
+                                  },
+                                ),
+                              );
+                            });
+                          });
+                        } else {
+                          dialog.showErrorDialog(
+                              'You have to complete at least five set. Then you can see the report.',
+                              context);
+                        }
+                      },
+                      child: Text(
+                        'See Report',
+                      ),
+                    ),
+                  );
+                }
                 final item = dataList[index];
                 return TrainingSetsCard(
                   exercise: widget.exercise,

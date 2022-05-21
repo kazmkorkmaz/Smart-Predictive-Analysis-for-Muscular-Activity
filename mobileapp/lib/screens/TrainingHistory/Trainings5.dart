@@ -109,6 +109,7 @@ class _Trainings5State extends State<Trainings5> {
                                   width: width * 0.9,
                                   height: height * 0.4,
                                   child: SfCartesianChart(
+                                      title: ChartTitle(text: 'Training data'),
                                       primaryYAxis:
                                           NumericAxis(maximum: 6, minimum: 0),
                                       primaryXAxis:
@@ -139,10 +140,16 @@ class _Trainings5State extends State<Trainings5> {
                                     ),
                                   );
                                 },
-                                body: Column(
-                                  children: [
-                                    Text(injuryText),
-                                  ],
+                                body: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Text(injuryText),
+                                      SizedBox(
+                                        height: 10,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               ExpansionPanelRadio(
@@ -155,12 +162,49 @@ class _Trainings5State extends State<Trainings5> {
                                     ),
                                   );
                                 },
-                                body: Text(improvement),
+                                body: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Text(improvement),
+                                      SizedBox(
+                                        height: 10,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                           SizedBox(
                             height: height * 0.02,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: width * 0.02),
+                              Icon(
+                                Icons.timer,
+                                size: 35,
+                              ),
+                              SizedBox(width: width * 0.05),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Duration:',
+                                    textScaleFactor: 1.2,
+                                  ),
+                                  Text(
+                                    data['duration'].toString(),
+                                    textScaleFactor: 1.2,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: height * 0.015,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -252,30 +296,6 @@ class _Trainings5State extends State<Trainings5> {
                                   ),
                                   Text(
                                     data['weight'].toString(),
-                                    textScaleFactor: 1.2,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(width: width * 0.02),
-                              Icon(
-                                Icons.timer,
-                                size: 35,
-                              ),
-                              SizedBox(width: width * 0.05),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Duration:',
-                                    textScaleFactor: 1.2,
-                                  ),
-                                  Text(
-                                    data['duration'].toString(),
                                     textScaleFactor: 1.2,
                                   ),
                                 ],

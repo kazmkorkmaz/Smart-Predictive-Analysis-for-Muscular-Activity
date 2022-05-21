@@ -189,6 +189,7 @@ class TrainingService {
         .collection('User')
         .doc(_auth.currentUser!.uid)
         .collection('Trainings')
+        .orderBy('createdAt', descending: false)
         .get();
 
     return datesRef;
@@ -233,6 +234,7 @@ class TrainingService {
         .collection('ExerciseName')
         .doc(exerciseName)
         .collection('Sets')
+        .orderBy('setNumber', descending: false)
         .get();
 
     return datesRef;
@@ -251,6 +253,25 @@ class TrainingService {
         .doc(exerciseName)
         .collection('Sets')
         .doc(setNumber)
+        .get();
+
+    return datesRef;
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getLastFiveSet(
+      String nameOfTrainings, String muscleName, String exerciseName) async {
+    final datesRef = await firestore
+        .collection('User')
+        .doc(_auth.currentUser!.uid)
+        .collection('Trainings')
+        .doc(nameOfTrainings)
+        .collection('MuscleGroup')
+        .doc(muscleName)
+        .collection('ExerciseName')
+        .doc(exerciseName)
+        .collection('Sets')
+        .orderBy('setNumber', descending: true)
+        .limit(5)
         .get();
 
     return datesRef;

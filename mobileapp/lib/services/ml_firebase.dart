@@ -59,4 +59,23 @@ class ML_Service {
     }
     return index;
   }
+
+  Future predictLastFive(var input) async {
+    final modelFile = await loadModel("deneme5");
+    final interpreter = Interpreter.fromFile(modelFile);
+    var inputFinal = List.filled(1, input).reshape([1, 5, 16]);
+    var output = List.filled(1 * 2, 0).reshape([1, 2]);
+    interpreter.run(inputFinal, output);
+
+    double max = 0;
+    int index = 0;
+    for (var i = 0; i < output[0].length; i++) {
+      if (output[0][i] >= max) {
+        max = output[0][i];
+        index = i;
+      }
+    }
+
+    return index;
+  }
 }

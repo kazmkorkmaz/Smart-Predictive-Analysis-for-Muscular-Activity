@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/TrainingHistory/Trainings4.dart';
 import 'package:mobileapp/screens/TrainingHistory/Trainings5.dart';
 
 class TrainingSetsCard extends StatelessWidget {

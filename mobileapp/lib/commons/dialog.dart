@@ -8,8 +8,14 @@ class MyDialog {
         title: Text('An Error Occurred!'),
         content: Text(message),
         actions: <Widget>[
-          FlatButton(
-            child: Text('Okay'),
+          TextButton(
+            child: Text(
+              'Ok',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
             onPressed: () {
               Navigator.of(ctx).pop();
             },

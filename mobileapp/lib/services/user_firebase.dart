@@ -101,6 +101,7 @@ class UserService {
         'hipst': hipst,
         'thigh': thigh,
         'createdAt': date,
+        'fPower': (arm * arm * (height / 100) * (height / 100)) / weight,
       }).then((value) => Navigator.of(context)
               .pushNamedAndRemoveUntil(
                   HomePage.routeName, (Route<dynamic> route) => false)

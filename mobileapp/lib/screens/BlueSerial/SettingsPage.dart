@@ -110,29 +110,6 @@ class _MainPage extends State<MainPage> {
               ),
             ),
             Divider(),
-            SwitchListTile(
-              title: const Text('Auto-try specific pin when pairing'),
-              subtitle: const Text('Pin 1234'),
-              value: _autoAcceptPairingRequests,
-              onChanged: (bool value) {
-                setState(() {
-                  _autoAcceptPairingRequests = value;
-                });
-                if (value) {
-                  FlutterBluetoothSerial.instance.setPairingRequestHandler(
-                      (BluetoothPairingRequest request) {
-                    print("Trying to auto-pair with Pin 1234");
-                    if (request.pairingVariant == PairingVariant.Pin) {
-                      return Future.value("1234");
-                    }
-                    return Future.value(null);
-                  });
-                } else {
-                  FlutterBluetoothSerial.instance
-                      .setPairingRequestHandler(null);
-                }
-              },
-            ),
             ListTile(
               title: ElevatedButton(
                   child: const Text('Explore discovered devices'),
