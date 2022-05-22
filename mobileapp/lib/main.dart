@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mobileapp/screens/BlueSerial/SettingsPage.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_history_graph.dart';
 import 'package:mobileapp/screens/BodyMeasurements/body_measurements-history.dart';
@@ -17,6 +18,10 @@ import 'package:mobileapp/screens/Training/training_two.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Firebase.initializeApp();
   runApp(MyApp());
 }

@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobileapp/services/training_firebase.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class LastFivePredictionScreen extends StatelessWidget {
+class LastFivePredictionScreen extends StatefulWidget {
   String nameOfTrainings;
   String muscleName;
   String exerciseName;
@@ -14,6 +14,13 @@ class LastFivePredictionScreen extends StatelessWidget {
       required this.nameOfTrainings,
       required this.muscleName,
       required this.exerciseName});
+
+  @override
+  State<LastFivePredictionScreen> createState() =>
+      _LastFivePredictionScreenState();
+}
+
+class _LastFivePredictionScreenState extends State<LastFivePredictionScreen> {
   @override
   Widget build(BuildContext context) {
     TrainingService trainingService = TrainingService();
@@ -25,7 +32,7 @@ class LastFivePredictionScreen extends StatelessWidget {
     int k = 0;
     int l = 0;
     int m = 0;
-    if (index == 0) {
+    if (widget.index == 0) {
       riskText =
           "You can continue training with this weights. According to last five set, there is no danger to your muscle health.";
     } else {
@@ -38,7 +45,7 @@ class LastFivePredictionScreen extends StatelessWidget {
         ),
         body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
             future: trainingService.getLastFiveSet(
-                nameOfTrainings, muscleName, exerciseName),
+                widget.nameOfTrainings, widget.muscleName, widget.exerciseName),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Center(

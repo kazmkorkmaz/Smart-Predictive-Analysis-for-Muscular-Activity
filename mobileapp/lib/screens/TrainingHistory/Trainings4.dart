@@ -64,7 +64,6 @@ class _Trainings4State extends State<Trainings4> {
                               .then((value) {
                             List input = [];
                             value.docs.forEach((element) {
-                              print(element.get('setNumber'));
                               input.add(element.get('features'));
                             });
 
@@ -91,6 +90,10 @@ class _Trainings4State extends State<Trainings4> {
                                   },
                                 ),
                               );
+                            }).onError((error, stackTrace) {
+                              dialog.showErrorDialog(
+                                  'An error occured! Please try again!',
+                                  context);
                             });
                           });
                         } else {

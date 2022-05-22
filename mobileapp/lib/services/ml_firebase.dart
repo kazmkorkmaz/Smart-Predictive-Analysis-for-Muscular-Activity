@@ -26,10 +26,9 @@ class ML_Service {
   }
 
   Future<int> predictInjuryRisk(var input) async {
-    final modelFile = await loadModel("deneme4");
+    final modelFile = await loadModel("InjuryRisk");
     final interpreter = Interpreter.fromFile(modelFile);
     var output = List.filled(1 * 2, 0).reshape([1, 2]);
-
     interpreter.run(input, output);
     double max = 0;
     int index = 0;
@@ -44,10 +43,9 @@ class ML_Service {
   }
 
   Future predictImprovement(var input) async {
-    final modelFile = await loadModel("deneme3");
+    final modelFile = await loadModel("TrainingQuality");
     final interpreter = Interpreter.fromFile(modelFile);
     var output = List.filled(1 * 3, 0).reshape([1, 3]);
-
     interpreter.run(input, output);
     double max = 0;
     int index = 0;
@@ -61,12 +59,11 @@ class ML_Service {
   }
 
   Future predictLastFive(var input) async {
-    final modelFile = await loadModel("deneme5");
+    final modelFile = await loadModel("InjuryPrediction");
     final interpreter = Interpreter.fromFile(modelFile);
     var inputFinal = List.filled(1, input).reshape([1, 5, 16]);
     var output = List.filled(1 * 2, 0).reshape([1, 2]);
     interpreter.run(inputFinal, output);
-
     double max = 0;
     int index = 0;
     for (var i = 0; i < output[0].length; i++) {
