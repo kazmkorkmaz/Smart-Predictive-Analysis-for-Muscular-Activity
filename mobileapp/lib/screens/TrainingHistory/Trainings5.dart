@@ -136,7 +136,7 @@ class _Trainings5State extends State<Trainings5> {
                                 headerBuilder: (context, isExpanded) {
                                   return ListTile(
                                     title: Text(
-                                      "Risk Injury",
+                                      "Injury Risk",
                                     ),
                                   );
                                 },

@@ -160,6 +160,7 @@ class _TrainingThreeState extends State<TrainingThree> {
                             ),
                             onPressed: () {
                               setState(() {
+                                _sendMessage('a');
                                 _sendMessage('b');
                                 timer = Timer.periodic(Duration(seconds: 1),
                                     (timer) {
@@ -193,7 +194,7 @@ class _TrainingThreeState extends State<TrainingThree> {
                               _sendMessage('c');
                               _sendMessage('c');
                               _sendMessage('c');
-
+                              _sendMessage('a');
                               setState(() {
                                 timer?.cancel();
                               });

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobileapp/screens/Training/training_five.dart';
 import 'package:mobileapp/screens/Training/training_one.dart';
 import 'package:mobileapp/services/training_firebase.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

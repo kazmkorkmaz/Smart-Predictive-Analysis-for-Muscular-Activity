@@ -181,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('By Creating an acoount, you are agreeing to MuscleNET'),
+                Text('By Creating an acoount, you are agreeing to our'),
               ],
             ),
             Row(
